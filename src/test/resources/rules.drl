@@ -1,0 +1,57 @@
+package com.wordpress.salaboy.content.decorate;
+
+import com.wordpress.salaboy.content.model.*;
+import com.wordpress.salaboy.content.model.components.*;
+
+#global
+
+
+rule "Add Banner1 when form data contains new"
+    when
+       $currentPage: Page()
+       $form: Form($data: data)
+       ComponentData(value matches "new") from $data
+    then
+       $currentPage.addVisualComponent(new Banner("Banner1"));
+end
+
+
+rule "Add New Link when there are two banners about Offers"
+    when
+      $currentPage: Page()
+      $banner1: Banner($data1: data)
+      $banner2: Banner(this != $banner1, $data2: data)
+      ComponentData(value matches "offer") from $data1
+      ComponentData(value matches "offer") from $data2
+      not( Link($name: name == "My Link to a new Offer"))
+    then
+      Link link = new Link("My Link to a new Offer");
+      insert(link);
+      $currentPage.addVisualComponent(link);
+      update($currentPage);
+end
+
+
+rule "Add new option to a list when there are two banners about offers"
+    when
+      $currentPage: Page()
+      $banner1: Banner($data1: data)
+      $banner2: Banner(this != $banner1, $data2: data)
+      $list: OptionList($dataList: data)
+      ComponentData(value matches "offer") from $data1
+      ComponentData(value matches "offer") from $data2
+    then
+       $list.addComponentData(1L, "new list option");
+end
+    
+rule "Add a link to go back if a link exist and it's to the goback link"
+    when 
+        $currentPage: Page()
+        not( Link($name: name == "goback"))
+        
+    then
+        Link link = new Link("goback");
+        insert(link);
+        $currentPage.addVisualComponent(link);
+        update($currentPage);
+end

@@ -1,0 +1,29 @@
+package com.wordpress.salaboy.content.decorate;
+
+import com.wordpress.salaboy.content.model.*;
+import com.wordpress.salaboy.content.model.components.*;
+import java.util.List;
+
+
+#global
+function Link selectRandomLink(List links){
+     double random = Math.random() * 100;
+        if(random > links.size()){
+            random = random % links.size();
+        }
+        
+        return (Link)links.get((int)random);
+}
+
+rule "Never have more than three links"
+    when
+       $currentPage: Page()
+       $linksList: List(size > 3) from collect(Link())
+    then
+       Link link = selectRandomLink($linksList);
+       $currentPage.removeVisualComponent(link);
+       update($currentPage);
+       retract(link);
+end
+
+
