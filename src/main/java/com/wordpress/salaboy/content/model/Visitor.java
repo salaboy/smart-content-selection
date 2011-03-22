@@ -17,7 +17,8 @@ public class Visitor {
     private String affinity;
     private String dateRange;
     private String comingFrom;
-
+    private boolean lowRated;
+    
     public Visitor() {
     }
 
@@ -76,6 +77,21 @@ public class Visitor {
     public void setLanguage(String language) {
         this.language = language;
     }
+
+    public boolean isLowRated() {
+        return lowRated;
+    }
+
+    public void setLowRated(boolean lowRated) {
+        this.lowRated = lowRated;
+    }
+
+    @Override
+    public String toString() {
+        return "Visitor{" + "userId=" + userId + ", site=" + site + ", context=" + context + ", language=" + language + ", affinity=" + affinity + ", dateRange=" + dateRange + ", comingFrom=" + comingFrom + ", lowRated=" + lowRated + '}';
+    }
+    
+    
     
     
     

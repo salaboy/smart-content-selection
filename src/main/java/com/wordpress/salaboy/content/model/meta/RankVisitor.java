@@ -39,4 +39,11 @@ public class RankVisitor {
         return rank.get();
     }
 
+    @Override
+    public String toString() {
+        return "RankVisitor{" + "visitor=" + visitor + ", rank=" + rank + '}';
+    }
+    
+    
+
 }

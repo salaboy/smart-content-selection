@@ -18,36 +18,42 @@ rule "add visitor"
 end
 
 rule "banner when language is english"
+    lock-on-active true
     when
         $rank: RankVisitor()
         $header: HttpHeader(language matches ".*en.*")
         
     then
         $rank.increaseRank(5); //+5 points for English Users
+        update($rank);
         
 end
 
 
 rule "TextBox for Mozilla Users!"
+    lock-on-active true
     when
         $rank: RankVisitor()
         $header: HttpHeader(userAgent matches ".*Mozilla.*")
     then
         $rank.increaseRank(10); //+10 points for Open Source Users
+        update($rank);
 end
 
 
 rule "Late visitor"
+    lock-on-active true
     when
         $rank: RankVisitor()
         $header: HttpHeader(date matches "")
         
     then
         $rank.decreaseRank(10); //-10 points for Late Visitors doesn't buy
-        
+        update($rank);
 end
 
 rule "Google referers"
+    lock-on-active true
     when
         $rank: RankVisitor()
         $header: HttpHeader(referer matches ".*google.*")
@@ -55,13 +61,46 @@ rule "Google referers"
     then
 
         $rank.increaseRank(3); //3 points for google referals
+        update($rank);
 end
 
 rule "Buy Phone Boost!"
+    lock-on-active true
     when
         $rank: RankVisitor()
         $header: HttpHeader(referer matches ".*buy.*phone.*")
         
     then
         $rank.increaseRank(20); //20 points for search parameter Buy Phone!
+        update($rank);
 end
+
+rule "Create a Banner if the rank is higher than 20"
+    lock-on-active true
+    salience -5
+    when
+       $rank: RankVisitor(rank > 20)
+    then
+       insert(new Banner("30% for you!"));
+end   
+
+rule "Create a TextBox if the rank is less than 20"
+    lock-on-active true
+    salience -5
+    when
+       $rank: RankVisitor(rank < 20 && > 10)
+    then
+        insert(new TextBox("10% of discount for your profile only"));
+end
+
+
+rule "Set Low Rated Visitor for ranking less than 10"
+    lock-on-active true
+    salience -5
+    when
+       $rank: RankVisitor(rank < 10)
+    then
+        $rank.getVisitor().setLowRated(true);
+        update($rank);
+
+end   
