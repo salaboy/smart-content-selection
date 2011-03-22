@@ -11,50 +11,57 @@ global java.util.List results;
 
 rule "add visitor"
     when
-        not(Visitor())
+        not(RankVisitor())
     then
-        insert(new Visitor());
+        insert(new RankVisitor(new Visitor()));
 
 end
 
 rule "banner when language is english"
     when
-        $visitor: Visitor()
+        $rank: RankVisitor()
         $header: HttpHeader(language matches ".*en.*")
         
     then
-        insert(new Banner("English Banner!"));
-        $visitor.setLanguage("English");
+        $rank.increaseRank(5); //+5 points for English Users
+        
 end
 
 
 rule "TextBox for Mozilla Users!"
     when
-        $visitor: Visitor()
+        $rank: RankVisitor()
         $header: HttpHeader(userAgent matches ".*Mozilla.*")
-        
     then
-        insert(new TextBox("Welcome Mozilla users!!"));
-        $visitor.setAffinity("Open Source");
+        $rank.increaseRank(10); //+10 points for Open Source Users
 end
 
 
 rule "Late visitor"
     when
-        $visitor: Visitor()
+        $rank: RankVisitor()
         $header: HttpHeader(date matches "")
         
     then
-        $visitor.setDateRange("Night");
+        $rank.decreaseRank(10); //-10 points for Late Visitors doesn't buy
         
 end
 
 rule "Google referers"
     when
-        $visitor: Visitor()
+        $rank: RankVisitor()
         $header: HttpHeader(referer matches ".*google.*")
         
     then
-        $visitor.setComingFrom("Google");
+
+        $rank.increaseRank(3); //3 points for google referals
+end
+
+rule "Buy Phone Boost!"
+    when
+        $rank: RankVisitor()
+        $header: HttpHeader(referer matches ".*buy.*phone.*")
         
+    then
+        $rank.increaseRank(20); //20 points for search parameter Buy Phone!
 end

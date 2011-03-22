@@ -4,6 +4,8 @@
  */
 package com.wordpress.salaboy.httpheadersoo;
 
+import java.util.List;
+
 /**
  *
  * @author salaboy
@@ -26,6 +28,7 @@ public class HttpHeader {
     private String via;
     private String From;
     private String date;
+    private List<String> searchTerms;
 
     public HttpHeader(String language, String userAgent, String referer, String via, String From, String date) {
         this.language = language;
@@ -84,6 +87,14 @@ public class HttpHeader {
         this.via = via;
     }
 
+    public List<String> getSearchTerms() {
+        return searchTerms;
+    }
+
+    public void setSearchTerms(List<String> searchTerms) {
+        this.searchTerms = searchTerms;
+    }
+    
     @Override
     public String toString() {
         return "HttpHeader{" + "language=" + language + ", userAgent=" + userAgent + ", referer=" + referer + ", via=" + via + ", From=" + From + ", date=" + date + '}';

@@ -173,6 +173,45 @@ public class ReferralStringProcessingTest {
 
     }
     
+    @Test
+    public void basicHeaderOORankingTest() {
+        // Create the Knowledge Builder
+        KnowledgeBuilder kbuilder = KnowledgeBuilderFactory.newKnowledgeBuilder();
+        // Add our rules
+        kbuilder.add(new ClassPathResource("http-headers-oo-ranking-rules.drl"), ResourceType.DRL);
+        //Check for errors during the compilation of the rules
+        KnowledgeBuilderErrors errors = kbuilder.getErrors();
+        if (errors.size() > 0) {
+            for (KnowledgeBuilderError error : errors) {
+                System.err.println(error);
+            }
+            throw new IllegalArgumentException("Could not parse knowledge.");
+        }
+
+        // Create the Knowledge Base
+        KnowledgeBase kbase = KnowledgeBaseFactory.newKnowledgeBase();
+        // Add the binary packages (compiled rules) to the Knowledge Base
+        kbase.addKnowledgePackages(kbuilder.getKnowledgePackages());
+        // Create the StatefulSession using the Knowledge Base that contains
+        // the compiled rules
+        StatefulKnowledgeSession ksession = kbase.newStatefulKnowledgeSession();
+
+        // We can add a runtime logger to understand what is going on inside the
+        // Engine
+        KnowledgeRuntimeLoggerFactory.newConsoleLogger(ksession);
+
+
+
+        List<Object> results = new ArrayList<Object>();
+        ksession.setGlobal("results", results);
+
+
+        ksession.insert(HttpHeaderToOOConverter.convert(new MockHttpServletRequest(headers)));
+
+        ksession.fireAllRules();
+
+    }
+    
     
 
     @Ignore
