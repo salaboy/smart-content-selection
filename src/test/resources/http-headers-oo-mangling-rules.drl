@@ -1,0 +1,28 @@
+package com.wordpress.salaboy.content.headers;
+
+import com.wordpress.salaboy.content.model.*;
+import com.wordpress.salaboy.content.model.components.*;
+import com.wordpress.salaboy.content.model.meta.*;
+
+import com.wordpress.salaboy.httpheadersoo.*;
+
+global java.util.List results;
+
+rule "banner when referral contains new phone"
+    when
+        $header: HttpHeader(language matches ".*en.*")
+        
+    then
+        insert(new Banner("English Banner!"));
+        results.add(new Offer("English Offer"));
+end
+
+
+rule "TextBox for Mozilla Users!"
+    when
+        $header: HttpHeader(userAgent matches ".*Mozilla.*")
+        
+    then
+        insert(new TextBox("Welcome Mozilla users!!"));
+        
+end

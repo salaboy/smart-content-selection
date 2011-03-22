@@ -2,8 +2,12 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.wordpress.salaboy.content.model;
+package com.wordpress.salaboy.content;
 
+import com.wordpress.salaboy.content.model.ComponentType;
+import com.wordpress.salaboy.content.model.Page;
+import com.wordpress.salaboy.content.model.SiteStructure;
+import com.wordpress.salaboy.content.model.VisualComponent;
 import java.util.ArrayList;
 import com.wordpress.salaboy.content.model.components.Link;
 import java.util.List;

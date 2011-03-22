@@ -4,12 +4,14 @@ import com.wordpress.salaboy.content.model.*;
 import com.wordpress.salaboy.content.model.components.*;
 import com.wordpress.salaboy.content.model.meta.*;
 
+global java.util.List results;
+
 rule "banner when referral contains new phone"
     when
         ReferralString(referralString matches ".*new.*phone.*")
     then
         insert(new Banner("20% discount in the second phone"));
-        insert(new Discount(20));
+        results.add(new Discount(20));
 end
 
 rule "new phone offer when referrals for google"
@@ -17,4 +19,5 @@ rule "new phone offer when referrals for google"
         ReferralString(referralString matches ".*google.*")
     then
         insert(new Banner("New phone arrives!!"));
+        results.add(new Offer("pre-order offer"));
 end

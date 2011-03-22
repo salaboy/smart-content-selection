@@ -1,0 +1,19 @@
+package com.wordpress.salaboy.content.headers;
+
+import com.wordpress.salaboy.content.model.*;
+import com.wordpress.salaboy.content.model.components.*;
+import com.wordpress.salaboy.content.model.meta.*;
+import javax.servlet.http.HttpServletRequest;
+
+
+global java.util.List results;
+
+rule "banner when referral contains new phone"
+    when
+        $request: HttpServletRequest()
+        eval($request.getHeader("Accept-Language").contains("en"))
+    then
+        insert(new Banner("English Banner!"));
+        results.add(new Offer("English Offer"));
+end
+
