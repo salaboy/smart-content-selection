@@ -1,0 +1,20 @@
+package com.wordpress.salaboy.content.referral;
+
+import com.wordpress.salaboy.content.model.*;
+import com.wordpress.salaboy.content.model.components.*;
+import com.wordpress.salaboy.content.model.meta.*;
+
+rule "banner when referral contains new phone"
+    when
+        ReferralString(referralString matches ".*new.*phone.*")
+    then
+        insert(new Banner("20% discount in the second phone"));
+        insert(new Discount(20));
+end
+
+rule "new phone offer when referrals for google"
+    when
+        ReferralString(referralString matches ".*google.*")
+    then
+        insert(new Banner("New phone arrives!!"));
+end

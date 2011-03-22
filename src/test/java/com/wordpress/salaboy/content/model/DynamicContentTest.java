@@ -280,7 +280,9 @@ public class DynamicContentTest {
         assertEquals(3, site.getCurrentPage().getComponentsByType(ComponentType.LINK).size());
         int gobacklinkcount = 0;
         int otherlinkscount = 0;
+        
         Thread.sleep(1000);
+        
         for(VisualComponent mylink : site.getCurrentPage().getComponentsByType(ComponentType.LINK)){
             if(mylink.getName().equals("goback")){
                 gobacklinkcount++;
@@ -294,6 +296,8 @@ public class DynamicContentTest {
         
 
     }
+    
+    
     
     
     @Test

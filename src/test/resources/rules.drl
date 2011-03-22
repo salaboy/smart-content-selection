@@ -55,3 +55,4 @@ rule "Add a link to go back if a link exist and it's to the goback link"
         $currentPage.addVisualComponent(link);
         update($currentPage);
 end
+
