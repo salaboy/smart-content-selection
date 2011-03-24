@@ -14,11 +14,11 @@ import java.util.List;
 public abstract class VisualComponent {
 
     private Long id;
-    private String name;
-    private VisualComponent parent;
-    private List<ComponentData> data;
-    private List<ComponentData> metadata;
-    private ComponentType type;
+    protected String name;
+    protected VisualComponent parent;
+    protected List<ComponentData> data;
+    protected List<ComponentData> metadata;
+    protected ComponentType type;
 
     public VisualComponent(String name, ComponentType type) {
         this.name = name;
