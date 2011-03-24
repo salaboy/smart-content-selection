@@ -10,6 +10,7 @@ global java.util.List results;
 
 
 rule "add visitor"
+    
     when
         not(RankVisitor())
     then
@@ -18,14 +19,14 @@ rule "add visitor"
 end
 
 rule "banner when language is english"
-    lock-on-active true
+    no-loop true
     when
         $rank: RankVisitor()
         $header: HttpHeader(language matches ".*en.*")
         
     then
         $rank.increaseRank(5); //+5 points for English Users
-        update($rank);
+        
         
 end
 
@@ -37,7 +38,7 @@ rule "TextBox for Mozilla Users!"
         $header: HttpHeader(userAgent matches ".*Mozilla.*")
     then
         $rank.increaseRank(10); //+10 points for Open Source Users
-        update($rank);
+        
 end
 
 
@@ -49,7 +50,7 @@ rule "Late visitor"
         
     then
         $rank.decreaseRank(10); //-10 points for Late Visitors doesn't buy
-        update($rank);
+        
 end
 
 rule "Google referers"
@@ -61,7 +62,7 @@ rule "Google referers"
     then
 
         $rank.increaseRank(3); //3 points for google referals
-        update($rank);
+        
 end
 
 rule "Buy Phone Boost!"
@@ -72,7 +73,7 @@ rule "Buy Phone Boost!"
         
     then
         $rank.increaseRank(20); //20 points for search parameter Buy Phone!
-        update($rank);
+        
 end
 
 rule "Create a Banner if the rank is higher than 20"

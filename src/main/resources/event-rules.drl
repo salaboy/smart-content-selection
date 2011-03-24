@@ -1,0 +1,54 @@
+package com.wordpress.salaboy.content.events;
+
+import com.wordpress.salaboy.content.model.*;
+import com.wordpress.salaboy.content.model.components.*;
+import com.wordpress.salaboy.content.model.meta.*;
+import com.wordpress.salaboy.content.model.events.*;
+import javax.swing.JTextArea;
+
+global javax.swing.JTextArea notifications;
+
+declare VisitProductEvent
+    @role( event )
+    
+end
+declare VisitThresholdReachedEvent
+    @role( event )
+end
+declare BuyProductEvent
+    @role( event )
+end
+
+rule " Three visits for product category component 1, tag it"
+   when
+
+      $n: Number( intValue == 3 ) from accumulate( $visit: VisitProductEvent(product.category == "Component 1") 
+                                                            over window:time(5m) from entry-point "visit-product-stream",
+                                                            count($visit)
+                                                 )
+   then
+       kcontext.getKnowledgeRuntime().getWorkingMemoryEntryPoint("buy-product-stream").insert(new VisitThresholdReachedEvent($n.intValue()));
+       notifications.setText("Three visits!!!");
+       
+end
+
+
+
+rule "No Buy after Threshold Reached! "
+   when
+
+      $thresholdReached: VisitThresholdReachedEvent($amount: amount) from entry-point "buy-product-stream"
+      not( BuyProductEvent(this after[0s,10s] $thresholdReached)  )                                           
+    then
+       notifications.setText("No Buy :( after 10s but VisitThreshold Reached ("+$amount+")!");
+      
+end
+
+rule "Quickly Buy after Threshold Reached! "
+   when
+      $thresholdReached: VisitThresholdReachedEvent($amount: amount) from entry-point "buy-product-stream"
+      BuyProductEvent(this after[0s,10s] $thresholdReached) from entry-point "buy-product-stream"                                          
+    then
+       notifications.setText("Thanks for buying so quickly!!! :) ");
+       
+end

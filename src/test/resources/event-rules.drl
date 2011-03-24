@@ -1,0 +1,28 @@
+package com.wordpress.salaboy.content.events;
+
+import com.wordpress.salaboy.content.model.*;
+import com.wordpress.salaboy.content.model.components.*;
+import com.wordpress.salaboy.content.model.meta.*;
+import com.wordpress.salaboy.content.model.events.*;
+import javax.swing.JTextArea;
+
+global javax.swing.JTextArea notifications;
+
+declare VisitProductEvent
+    @role( event )
+    
+end
+
+
+rule " Three products from category Brand New Phone, offer discount"
+   when
+
+      $n: Number( doubleValue == 3 ) from accumulate( $visit: VisitProductEvent(product.category == "Component 1") 
+                                                            over window:time(5m) from entry-point "visit-product-stream",
+                                                            count($visit)
+                                                 )
+   then
+       notifications.setText("Three visits!!!");
+       System.out.println("Three visits");
+end
+
