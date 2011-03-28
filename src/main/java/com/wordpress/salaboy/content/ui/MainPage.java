@@ -70,7 +70,8 @@ public class MainPage extends javax.swing.JDialog {
         KnowledgeBuilder kbuilder = KnowledgeBuilderFactory.newKnowledgeBuilder();
         // Add our rules
         //kbuilder.add(new ClassPathResource("event-rules.drl"), ResourceType.DRL);
-        kbuilder.add(new ByteArrayResource(jTextArea2.getText().getBytes()), ResourceType.DRL);
+        kbuilder.add(new ClassPathResource("event-rules.dsl"), ResourceType.DSL);
+        kbuilder.add(new ByteArrayResource(jTextArea2.getText().getBytes()), ResourceType.DSLR);
         //Check for errors during the compilation of the rules
         KnowledgeBuilderErrors errors = kbuilder.getErrors();
         if (errors.size() > 0) {
@@ -890,7 +891,7 @@ public class MainPage extends javax.swing.JDialog {
         BufferedReader in = null;
         try {
             String text = "";
-            in = new BufferedReader(new InputStreamReader(new ClassPathResource("event-rules.drl").getInputStream()));
+            in = new BufferedReader(new InputStreamReader(new ClassPathResource("event-rules.dslr").getInputStream()));
             String line = null;
             while ((line = in.readLine()) != null) {
                 text += line + "\n";

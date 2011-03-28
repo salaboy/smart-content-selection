@@ -1,0 +1,132 @@
+package com.wordpress.salaboy.content.events;
+
+import com.wordpress.salaboy.content.model.*;
+import com.wordpress.salaboy.content.model.components.*;
+import com.wordpress.salaboy.content.model.meta.*;
+import com.wordpress.salaboy.content.model.events.*;
+import javax.swing.JTextArea;
+import javax.swing.JDesktopPane;
+import java.util.List;
+import java.util.ArrayList;
+
+global javax.swing.JTextArea notifications;
+global javax.swing.JDesktopPane panel;
+
+declare ProductFocusGainedEvent
+    @role( event )
+end
+declare VisitThresholdReachedEvent
+    @role( event )
+end
+
+declare VisitComboEvent
+    @role( event )
+end
+declare BuyProductEvent
+    @role( event )
+end
+
+declare ProductFocusLostEvent
+    @role( event )
+end
+
+declare SearchTriggeredEvent
+    @role( event )
+end
+
+
+rule " Three visits product 1, tag it"
+   when
+      The product "Product 1" gains focus more than 3 in 5 minutes      
+   then
+       Add notification: "Three  Product 1 visits!!!"
+       Add a VISIT THRESHOLD REACHED EVENT for the product
+end
+
+rule " Four visits for product 2, tag it"
+   when
+      The product "Product 2" gains focus more than 4 in 5 minutes
+   then
+       Add notification: "Four  Product 2 visits!!!" 
+       Add a VISIT THRESHOLD REACHED EVENT for the product
+end
+
+rule " Two visits for product 3, tag it"
+   when
+      The product "Product 3" gains focus more than 2 in 5 minutes
+   then
+      Add notification: "Four  Product 3 visits!!!" 
+      Add a VISIT THRESHOLD REACHED EVENT for the product
+end
+
+rule " Focus gained without focus lost 10s"
+   when
+       The product "Product 1" gains focus
+       AND
+       The product "Product 1" doesn't loose the focus for 10 seconds
+   then
+       Add notification: "Are You Interested in This Product -> Find out More!"
+end
+
+
+rule " Visits for product 1 followed by 3 and then 2 in two minutes"
+   when
+       The product "Product 1" gains focus -> $p1
+       AND
+       The product "Product 3" gains focus 2 seconds after $p1 -> $p3
+       AND
+       The product "Product 2" gains focus 4 seconds after $p1 -> $p2
+   then
+       Add notification: "1, 3, 2 Combo!";
+       Create a new Product list -> $products
+       Add product $p1 to $products
+       Add product $p2 to $products
+       Add product $p3 to $products
+       Add $products as a COMBO EVENT
+end
+
+rule "when we get a visit combo, insert the products for suggestions"
+    when
+       There is a COMBO EVENT
+    then
+       Add notification about COMBO EVENT SIZE
+       Add a new SWING COMPONENT with title "You are maybe interested in: Product 4" in <280> <200>
+end
+
+
+rule "No Buy after Threshold Reached! "
+   when
+      There is a VISIT THRESHOLD REACHED EVENT -> $thresholdReached
+      AND
+      There is no BUY EVENT 10 seconds after $thresholdReached
+    then
+       Add notification: "No Buy :( after 10s but VisitThreshold Reached!";
+       Add a new SWING COMPONENT with title "Buy now 10% Discount on \n Product 1" in <30> <200>
+end
+
+rule "Quickly Buy after Threshold Reached! "
+   when
+        There is a VISIT THRESHOLD REACHED EVENT -> $thresholdReached
+        There is a BUY EVENT 10 seconds after $thresholdReached                                       
+    then
+       Add notification: "Thanks for buying so quickly!!! :) ";
+end
+
+//Based on focus sliding windows, create time based hot-topic lists
+
+//Based on based on links and time windows create a list of interest / hot-topics and discard non interesting ones
+
+//Filters based on categories and time between filters
+
+// User Mode : General Search, Read Information, Looking for something in particular
+
+//Interest Search: textbox for describe interest terms, we will look for metadata into the different components available and we will suggest filters
+// that can lead to relevant products
+
+//Create situation that requires a business process for a campaign creation
+
+
+
+
+
+
