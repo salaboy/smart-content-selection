@@ -60,7 +60,7 @@ public class MainPage extends javax.swing.JDialog {
         loadRulesFromFile();
         initDrools();
         myInitComponents();
-        insertCurrentVisualStatus();
+        updateCurrentVisualStatus();
        
 
     }
@@ -612,7 +612,7 @@ public class MainPage extends javax.swing.JDialog {
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         //saveRules();
         initDrools();
-        insertCurrentVisualStatus();
+        updateCurrentVisualStatus();
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
@@ -621,7 +621,11 @@ public class MainPage extends javax.swing.JDialog {
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        // TODO add your handling code here:
+        SwingVisualComponent productXComponent = new SwingVisualComponent(jTextField2.getText(), 30, 230);
+        visualComponents.add(productXComponent);
+        JInternalFrame jInternalFrameX = productXComponent.getFrame();
+        jDesktopPane1.add(jInternalFrameX, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        updateCurrentVisualStatus();
     }//GEN-LAST:event_jButton7ActionPerformed
     private static MainPage instance = null;
 
@@ -739,14 +743,12 @@ public class MainPage extends javax.swing.JDialog {
 
 
         SwingVisualComponent product1Component = new SwingVisualComponent("Product 1", 30, 30);
-        //ksession.insert(product1Component);
         visualComponents.add(product1Component);
         jInternalFrame1 = product1Component.getFrame();
         jDesktopPane1.add(jInternalFrame1, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
 
         SwingVisualComponent product2Component = new SwingVisualComponent("Product 2", 280, 30);
-        //ksession.insert(product2Component);
         visualComponents.add(product2Component);
         jInternalFrame2 = product2Component.getFrame();
 
@@ -754,7 +756,6 @@ public class MainPage extends javax.swing.JDialog {
 
 
         SwingVisualComponent product3Component = new SwingVisualComponent("Product 3", 530, 30);
-        //ksession.insert(product3Component);
         visualComponents.add(product3Component);
         jInternalFrame3 = product3Component.getFrame();
         jDesktopPane1.add(jInternalFrame3, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -879,7 +880,7 @@ public class MainPage extends javax.swing.JDialog {
 
   
 
-    private void insertCurrentVisualStatus() {
+    private void updateCurrentVisualStatus() {
         for(VisualComponent component : visualComponents){
             ksession.insert(component);
         }
