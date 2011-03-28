@@ -30,8 +30,12 @@ declare ProductFocusLostEvent
     @role( event )
 end
 
+declare SearchTriggeredEvent
+    @role( event )
+end
 
-rule " Three visits for product category component 1, tag it"
+
+rule " Three visits product 1, tag it"
    when
 
       $list: List( $n: size == 3 ) from accumulate( $visit: ProductFocusGainedEvent(product.category == "Product 1") 
@@ -39,12 +43,39 @@ rule " Three visits for product category component 1, tag it"
                                                             collectList($visit)
                                                  )
    then
-       notifications.setText("Three visits!!!");
+       notifications.setText("Three  Product 1 visits!!!");
        kcontext.getKnowledgeRuntime().getWorkingMemoryEntryPoint("buy-product-stream")
                         .insert(new VisitThresholdReachedEvent($n, ((ProductFocusGainedEvent)$list.get(0)).getProduct()));
        
 end
 
+rule " Four visits for product 2, tag it"
+   when
+
+      $list: List( $n: size == 4 ) from accumulate( $visit: ProductFocusGainedEvent(product.category == "Product 2") 
+                                                            over window:time(5m) from entry-point "visit-product-stream",
+                                                            collectList($visit)
+                                                 )
+   then
+       notifications.setText("Four Product 2 visits!!!");
+       kcontext.getKnowledgeRuntime().getWorkingMemoryEntryPoint("buy-product-stream")
+                        .insert(new VisitThresholdReachedEvent($n, ((ProductFocusGainedEvent)$list.get(0)).getProduct()));
+       
+end
+
+rule " Two visits for product 3, tag it"
+   when
+
+      $list: List( $n: size == 2 ) from accumulate( $visit: ProductFocusGainedEvent(product.category == "Product 3") 
+                                                            over window:time(5m) from entry-point "visit-product-stream",
+                                                            collectList($visit)
+                                                 )
+   then
+       notifications.setText("Two Product 3 visits!!!");
+       kcontext.getKnowledgeRuntime().getWorkingMemoryEntryPoint("buy-product-stream")
+                        .insert(new VisitThresholdReachedEvent($n, ((ProductFocusGainedEvent)$list.get(0)).getProduct()));
+       
+end
 
 rule " Focus gained without focus lost 10s"
    when
@@ -114,6 +145,21 @@ rule "Quickly Buy after Threshold Reached! "
        notifications.setText("Thanks for buying so quickly!!! :) ");
        
 end
+
+
+//Based on focus sliding windows, create time based hot-topic lists
+
+//Based on based on links and time windows create a list of interest / hot-topics and discard non interesting ones
+
+//Filters based on categories and time between filters
+
+// User Mode : General Search, Read Information, Looking for something in particular
+
+//Interest Search: textbox for describe interest terms, we will look for metadata into the different components available and we will suggest filters
+// that can lead to relevant products
+
+//Create situation that requires a business process for a campaign creation
+
 
 
 
