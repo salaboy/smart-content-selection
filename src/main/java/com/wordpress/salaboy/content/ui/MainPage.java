@@ -26,6 +26,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JInternalFrame;
+import javax.swing.JTextArea;
 import org.drools.KnowledgeBase;
 import org.drools.KnowledgeBaseConfiguration;
 import org.drools.KnowledgeBaseFactory;
@@ -71,7 +72,10 @@ public class MainPage extends javax.swing.JDialog {
         // Add our rules
         //kbuilder.add(new ClassPathResource("event-rules.drl"), ResourceType.DRL);
         kbuilder.add(new ClassPathResource("event-rules.dsl"), ResourceType.DSL);
-        kbuilder.add(new ByteArrayResource(jTextArea2.getText().getBytes()), ResourceType.DSLR);
+        
+        
+        String rules = txtRuleHeader.getText()+"\n\n"+jTextArea2.getText();
+        kbuilder.add(new ByteArrayResource(rules.getBytes()), ResourceType.DSLR);
         //Check for errors during the compilation of the rules
         KnowledgeBuilderErrors errors = kbuilder.getErrors();
         if (errors.size() > 0) {
@@ -637,15 +641,21 @@ public class MainPage extends javax.swing.JDialog {
     }
 
     private void loadRulesFromFile() {
+        jTextArea2.setText("");
+        txtRuleHeader.setText("");
         BufferedReader in = null;
         try {
-            String text = "";
             in = new BufferedReader(new InputStreamReader(new ClassPathResource("event-rules.dslr").getInputStream()));
+            
+            JTextArea currentTextArea = txtRuleHeader;
+            
             String line = null;
             while ((line = in.readLine()) != null) {
-                text += line + "\n";
+                if (line.contains("<--Body-->")){
+                    currentTextArea = jTextArea2;
+                }
+                currentTextArea.append(line+ "\n");
             }
-            jTextArea2.setText(text);
         } catch (IOException ex) {
             Logger.getLogger(MainPage.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
