@@ -16,9 +16,9 @@ import com.wordpress.salaboy.content.model.events.BuyProductEvent;
 import com.wordpress.salaboy.content.model.events.ProductFocusGainedEvent;
 import com.wordpress.salaboy.content.model.events.ProductFocusLostEvent;
 import com.wordpress.salaboy.content.model.meta.Product;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
@@ -55,7 +55,7 @@ public class MainPage extends javax.swing.JDialog {
     /** Creates new form MainPage */
     public MainPage(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
-        // initComponents();
+        initComponents();
         instantiateSwingComponents();
         loadRulesFromFile();
         initDrools();
@@ -128,20 +128,8 @@ public class MainPage extends javax.swing.JDialog {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
         jLabel2 = new javax.swing.JLabel();
-        try {
-            jTabbedPane1 =(javax.swing.JTabbedPane)java.beans.Beans.instantiate(getClass().getClassLoader(), "com/wordpress/salaboy/content/ui.MainPage_jTabbedPane1");
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        } catch (java.io.IOException e) {
-            e.printStackTrace();
-        }
+        jTabbedPane3 = new javax.swing.JTabbedPane();
         jDesktopPane1 = new javax.swing.JDesktopPane();
-        jInternalFrame1 = new javax.swing.JInternalFrame();
-        jLabel3 = new javax.swing.JLabel();
-        jInternalFrame2 = new javax.swing.JInternalFrame();
-        jLabel4 = new javax.swing.JLabel();
-        jInternalFrame3 = new javax.swing.JInternalFrame();
-        jLabel5 = new javax.swing.JLabel();
         jInternalFrame6 = new javax.swing.JInternalFrame();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
@@ -159,9 +147,12 @@ public class MainPage extends javax.swing.JDialog {
         jDesktopPane2 = new javax.swing.JDesktopPane();
         jInternalFrame4 = new javax.swing.JInternalFrame();
         jButton5 = new javax.swing.JButton();
+        jButton6 = new javax.swing.JButton();
+        jTabbedPane2 = new javax.swing.JTabbedPane();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        txtRuleHeader = new javax.swing.JTextArea();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTextArea2 = new javax.swing.JTextArea();
-        jButton6 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -176,111 +167,6 @@ public class MainPage extends javax.swing.JDialog {
                 MainPage.this.focusGained(evt);
             }
         });
-
-        jInternalFrame1.setTitle("Component 1");
-        jInternalFrame1.setVisible(true);
-        jInternalFrame1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jInternalFrame1MouseClicked(evt);
-            }
-        });
-        jInternalFrame1.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                MainPage.this.focusGained(evt);
-            }
-        });
-
-        jLabel3.setText("Product 1");
-
-        org.jdesktop.layout.GroupLayout jInternalFrame1Layout = new org.jdesktop.layout.GroupLayout(jInternalFrame1.getContentPane());
-        jInternalFrame1.getContentPane().setLayout(jInternalFrame1Layout);
-        jInternalFrame1Layout.setHorizontalGroup(
-            jInternalFrame1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(jInternalFrame1Layout.createSequentialGroup()
-                .addContainerGap()
-                .add(jLabel3)
-                .addContainerGap(136, Short.MAX_VALUE))
-        );
-        jInternalFrame1Layout.setVerticalGroup(
-            jInternalFrame1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(jInternalFrame1Layout.createSequentialGroup()
-                .addContainerGap()
-                .add(jLabel3)
-                .addContainerGap(28, Short.MAX_VALUE))
-        );
-
-        jInternalFrame1.setBounds(20, 20, 240, 110);
-        jDesktopPane1.add(jInternalFrame1, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
-        jInternalFrame2.setTitle("Component 2");
-        jInternalFrame2.setVisible(true);
-        jInternalFrame2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jInternalFrame2MouseClicked(evt);
-            }
-        });
-        jInternalFrame2.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                MainPage.this.focusGained(evt);
-            }
-        });
-
-        jLabel4.setText("Product 2");
-
-        org.jdesktop.layout.GroupLayout jInternalFrame2Layout = new org.jdesktop.layout.GroupLayout(jInternalFrame2.getContentPane());
-        jInternalFrame2.getContentPane().setLayout(jInternalFrame2Layout);
-        jInternalFrame2Layout.setHorizontalGroup(
-            jInternalFrame2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(jInternalFrame2Layout.createSequentialGroup()
-                .addContainerGap()
-                .add(jLabel4)
-                .addContainerGap(136, Short.MAX_VALUE))
-        );
-        jInternalFrame2Layout.setVerticalGroup(
-            jInternalFrame2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(jInternalFrame2Layout.createSequentialGroup()
-                .addContainerGap()
-                .add(jLabel4)
-                .addContainerGap(28, Short.MAX_VALUE))
-        );
-
-        jInternalFrame2.setBounds(20, 120, 240, 110);
-        jDesktopPane1.add(jInternalFrame2, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
-        jInternalFrame3.setTitle("Component 3");
-        jInternalFrame3.setVisible(true);
-        jInternalFrame3.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jInternalFrame3MouseClicked(evt);
-            }
-        });
-        jInternalFrame3.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                MainPage.this.focusGained(evt);
-            }
-        });
-
-        jLabel5.setText("Product 3");
-
-        org.jdesktop.layout.GroupLayout jInternalFrame3Layout = new org.jdesktop.layout.GroupLayout(jInternalFrame3.getContentPane());
-        jInternalFrame3.getContentPane().setLayout(jInternalFrame3Layout);
-        jInternalFrame3Layout.setHorizontalGroup(
-            jInternalFrame3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(jInternalFrame3Layout.createSequentialGroup()
-                .addContainerGap()
-                .add(jLabel5)
-                .addContainerGap(136, Short.MAX_VALUE))
-        );
-        jInternalFrame3Layout.setVerticalGroup(
-            jInternalFrame3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(jInternalFrame3Layout.createSequentialGroup()
-                .addContainerGap()
-                .add(jLabel5)
-                .addContainerGap(28, Short.MAX_VALUE))
-        );
-
-        jInternalFrame3.setBounds(20, 220, 240, 110);
-        jDesktopPane1.add(jInternalFrame3, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jInternalFrame6.setClosable(true);
         jInternalFrame6.setIconifiable(true);
@@ -325,7 +211,7 @@ public class MainPage extends javax.swing.JDialog {
                     .add(jButton2)
                     .add(org.jdesktop.layout.GroupLayout.TRAILING, jInternalFrame6Layout.createSequentialGroup()
                         .add(jTextField2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 96, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 52, Short.MAX_VALUE)
                         .add(jButton7)))
                 .addContainerGap())
         );
@@ -342,7 +228,7 @@ public class MainPage extends javax.swing.JDialog {
                 .addContainerGap())
         );
 
-        jInternalFrame6.setBounds(310, 200, 300, 161);
+        jInternalFrame6.setBounds(310, 200, 300, 151);
         jDesktopPane1.add(jInternalFrame6, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jInternalFrame7.setClosable(true);
@@ -384,7 +270,7 @@ public class MainPage extends javax.swing.JDialog {
                     .add(jCheckBox4)
                     .add(jButton3)
                     .add(jCheckBox1))
-                .addContainerGap(59, Short.MAX_VALUE))
+                .addContainerGap(78, Short.MAX_VALUE))
         );
         jInternalFrame7Layout.setVerticalGroup(
             jInternalFrame7Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -427,12 +313,12 @@ public class MainPage extends javax.swing.JDialog {
                 .add(jTextField1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 105, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(jButton4, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 48, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(47, Short.MAX_VALUE))
         );
         jInternalFrame8Layout.setVerticalGroup(
             jInternalFrame8Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(org.jdesktop.layout.GroupLayout.TRAILING, jInternalFrame8Layout.createSequentialGroup()
-                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(37, Short.MAX_VALUE)
                 .add(jInternalFrame8Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(jTextField1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                     .add(jButton4))
@@ -442,7 +328,7 @@ public class MainPage extends javax.swing.JDialog {
         jInternalFrame8.setBounds(650, 290, 220, 110);
         jDesktopPane1.add(jInternalFrame8, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-        jTabbedPane1.addTab("Customer Page", jDesktopPane1);
+        jTabbedPane3.addTab("Customer Page", jDesktopPane1);
 
         jInternalFrame4.setTitle("Management Tab");
         jInternalFrame4.setVisible(true);
@@ -454,10 +340,6 @@ public class MainPage extends javax.swing.JDialog {
             }
         });
 
-        jTextArea2.setColumns(20);
-        jTextArea2.setRows(5);
-        jScrollPane3.setViewportView(jTextArea2);
-
         jButton6.setText("Apply");
         jButton6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -465,14 +347,33 @@ public class MainPage extends javax.swing.JDialog {
             }
         });
 
+        jTabbedPane2.setTabPlacement(javax.swing.JTabbedPane.LEFT);
+
+        jScrollPane2.setName("Header"); // NOI18N
+
+        txtRuleHeader.setColumns(20);
+        txtRuleHeader.setRows(5);
+        jScrollPane2.setViewportView(txtRuleHeader);
+
+        jTabbedPane2.addTab("Header", jScrollPane2);
+
+        jScrollPane3.setName("Rules"); // NOI18N
+
+        jTextArea2.setColumns(20);
+        jTextArea2.setRows(5);
+        jScrollPane3.setViewportView(jTextArea2);
+
+        jTabbedPane2.addTab("Rules", jScrollPane3);
+
+        jTabbedPane2.setSelectedIndex(1);
+
         org.jdesktop.layout.GroupLayout jInternalFrame4Layout = new org.jdesktop.layout.GroupLayout(jInternalFrame4.getContentPane());
         jInternalFrame4.getContentPane().setLayout(jInternalFrame4Layout);
         jInternalFrame4Layout.setHorizontalGroup(
             jInternalFrame4Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(org.jdesktop.layout.GroupLayout.TRAILING, jInternalFrame4Layout.createSequentialGroup()
-                .addContainerGap()
-                .add(jScrollPane3, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 687, Short.MAX_VALUE)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+                .add(jTabbedPane2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 763, Short.MAX_VALUE)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(jInternalFrame4Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                     .add(jButton5)
                     .add(jButton6))
@@ -487,16 +388,14 @@ public class MainPage extends javax.swing.JDialog {
                         .add(jButton5)
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                         .add(jButton6))
-                    .add(jInternalFrame4Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .add(jScrollPane3, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 262, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(38, Short.MAX_VALUE))
+                    .add(jTabbedPane2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 317, Short.MAX_VALUE))
+                .add(22, 22, 22))
         );
 
         jInternalFrame4.setBounds(10, 10, 850, 370);
         jDesktopPane2.add(jInternalFrame4, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-        jTabbedPane1.addTab("Management Tab", jDesktopPane2);
+        jTabbedPane3.addTab("Management Tab", jDesktopPane2);
 
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -505,7 +404,7 @@ public class MainPage extends javax.swing.JDialog {
             .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
-                    .add(org.jdesktop.layout.GroupLayout.LEADING, jTabbedPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 899, Short.MAX_VALUE)
+                    .add(org.jdesktop.layout.GroupLayout.LEADING, jTabbedPane3, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 899, Short.MAX_VALUE)
                     .add(org.jdesktop.layout.GroupLayout.LEADING, jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 899, Short.MAX_VALUE)
                     .add(org.jdesktop.layout.GroupLayout.LEADING, jLabel2))
                 .addContainerGap())
@@ -514,7 +413,7 @@ public class MainPage extends javax.swing.JDialog {
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .add(jTabbedPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 429, Short.MAX_VALUE)
+                .add(jTabbedPane3, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 467, Short.MAX_VALUE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(jLabel2)
                 .add(18, 18, 18)
@@ -525,8 +424,84 @@ public class MainPage extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        //saveRules();
+        initDrools();
+        updateCurrentVisualStatus();
+}//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        loadRulesFromFile();
+    }//GEN-LAST:event_jButton5ActionPerformed
+
     private void focusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_focusGained
-    }//GEN-LAST:event_focusGained
+        
+}//GEN-LAST:event_focusGained
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        //        ksession.getWorkingMemoryEntryPoint("visit-product-stream")
+        //                    .insert(new SearchTriggeredEvent(jTextField1.getText()));
+}//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        
+}//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jCheckBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox2ActionPerformed
+        // TODO add your handling code here:
+}//GEN-LAST:event_jCheckBox2ActionPerformed
+
+    private void jInternalFrame6FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jInternalFrame6FocusLost
+        // TODO add your handling code here:
+}//GEN-LAST:event_jInternalFrame6FocusLost
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        SwingVisualComponent productXComponent = new SwingVisualComponent(jTextField2.getText(), 30, 230);
+        visualComponents.add(productXComponent);
+        JInternalFrame jInternalFrameX = productXComponent.getFrame();
+        jDesktopPane1.add(jInternalFrameX, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        updateCurrentVisualStatus();
+}//GEN-LAST:event_jButton7ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        jInternalFrame10 = new javax.swing.JInternalFrame();
+        jLabel20 = new javax.swing.JLabel();
+        jInternalFrame10.setTitle("Banner 1");
+        jInternalFrame10.setVisible(true);
+        jInternalFrame10.addMouseListener(new java.awt.event.MouseAdapter() {
+            
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                internalFrameMouseClicked(evt);
+            }
+        });
+        jInternalFrame10.addFocusListener(new java.awt.event.FocusAdapter() {
+            
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                MainPage.this.focusGained(evt);
+            }
+        });
+        
+        jLabel20.setText("Banner \nContent");
+        
+        org.jdesktop.layout.GroupLayout jInternalFrame10Layout = new org.jdesktop.layout.GroupLayout(jInternalFrame10.getContentPane());
+        jInternalFrame10.getContentPane().setLayout(jInternalFrame10Layout);
+        jInternalFrame10Layout.setHorizontalGroup(
+                jInternalFrame10Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING).add(jInternalFrame10Layout.createSequentialGroup().addContainerGap().add(jLabel20).addContainerGap(136, Short.MAX_VALUE)));
+        jInternalFrame10Layout.setVerticalGroup(
+                jInternalFrame10Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING).add(jInternalFrame10Layout.createSequentialGroup().addContainerGap().add(jLabel20).addContainerGap(28, Short.MAX_VALUE)));
+        
+        jInternalFrame10.setBounds(480, 10, 200, 250);
+        jDesktopPane1.add(jInternalFrame10, javax.swing.JLayeredPane.DEFAULT_LAYER);
+}//GEN-LAST:event_jButton2ActionPerformed
+
+    private void internalFrameMouseClicked(java.awt.event.MouseEvent evt){
+        evt.getComponent().requestFocus();
+    }
+    
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        ksession.getWorkingMemoryEntryPoint("buy-product-stream").insert(new BuyProductEvent());
+}//GEN-LAST:event_jButton1ActionPerformed
 
     public void myFocusGained(java.awt.event.FocusEvent evt) {
         if (evt.getComponent() instanceof JInternalFrame) {
@@ -545,89 +520,6 @@ public class MainPage extends javax.swing.JDialog {
         }
 
     }
-
-    private void jInternalFrame1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jInternalFrame1MouseClicked
-        evt.getComponent().requestFocus();
-    }//GEN-LAST:event_jInternalFrame1MouseClicked
-
-    private void jInternalFrame2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jInternalFrame2MouseClicked
-        evt.getComponent().requestFocus();
-    }//GEN-LAST:event_jInternalFrame2MouseClicked
-
-    private void jInternalFrame3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jInternalFrame3MouseClicked
-        evt.getComponent().requestFocus();
-    }//GEN-LAST:event_jInternalFrame3MouseClicked
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        ksession.getWorkingMemoryEntryPoint("buy-product-stream").insert(new BuyProductEvent());
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-        jInternalFrame10 = new javax.swing.JInternalFrame();
-        jLabel20 = new javax.swing.JLabel();
-        jInternalFrame10.setTitle("Banner 1");
-        jInternalFrame10.setVisible(true);
-        jInternalFrame10.addMouseListener(new java.awt.event.MouseAdapter() {
-
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jInternalFrame3MouseClicked(evt);
-            }
-        });
-        jInternalFrame10.addFocusListener(new java.awt.event.FocusAdapter() {
-
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                MainPage.this.focusGained(evt);
-            }
-        });
-
-        jLabel20.setText("Banner \nContent");
-
-        org.jdesktop.layout.GroupLayout jInternalFrame10Layout = new org.jdesktop.layout.GroupLayout(jInternalFrame10.getContentPane());
-        jInternalFrame10.getContentPane().setLayout(jInternalFrame10Layout);
-        jInternalFrame10Layout.setHorizontalGroup(
-                jInternalFrame10Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING).add(jInternalFrame10Layout.createSequentialGroup().addContainerGap().add(jLabel20).addContainerGap(136, Short.MAX_VALUE)));
-        jInternalFrame10Layout.setVerticalGroup(
-                jInternalFrame10Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING).add(jInternalFrame10Layout.createSequentialGroup().addContainerGap().add(jLabel20).addContainerGap(28, Short.MAX_VALUE)));
-
-        jInternalFrame10.setBounds(480, 10, 200, 250);
-        jDesktopPane1.add(jInternalFrame10, javax.swing.JLayeredPane.DEFAULT_LAYER);
-    }//GEN-LAST:event_jButton2ActionPerformed
-
-    private void jInternalFrame6FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jInternalFrame6FocusLost
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jInternalFrame6FocusLost
-
-    private void jCheckBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBox2ActionPerformed
-
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-    }//GEN-LAST:event_jButton3ActionPerformed
-
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-//        ksession.getWorkingMemoryEntryPoint("visit-product-stream")
-//                    .insert(new SearchTriggeredEvent(jTextField1.getText()));
-    }//GEN-LAST:event_jButton4ActionPerformed
-
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        //saveRules();
-        initDrools();
-        updateCurrentVisualStatus();
-    }//GEN-LAST:event_jButton6ActionPerformed
-
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        loadRulesFromFile();
-
-    }//GEN-LAST:event_jButton5ActionPerformed
-
-    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        SwingVisualComponent productXComponent = new SwingVisualComponent(jTextField2.getText(), 30, 230);
-        visualComponents.add(productXComponent);
-        JInternalFrame jInternalFrameX = productXComponent.getFrame();
-        jDesktopPane1.add(jInternalFrameX, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        updateCurrentVisualStatus();
-    }//GEN-LAST:event_jButton7ActionPerformed
     private static MainPage instance = null;
 
     public static MainPage getInstance() {
@@ -669,212 +561,242 @@ public class MainPage extends javax.swing.JDialog {
     private javax.swing.JCheckBox jCheckBox4;
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JDesktopPane jDesktopPane2;
-    private javax.swing.JInternalFrame jInternalFrame1;
-    private javax.swing.JInternalFrame jInternalFrame2;
-    private javax.swing.JInternalFrame jInternalFrame3;
     private javax.swing.JInternalFrame jInternalFrame4;
     private javax.swing.JInternalFrame jInternalFrame6;
     private javax.swing.JInternalFrame jInternalFrame7;
     private javax.swing.JInternalFrame jInternalFrame8;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JTabbedPane jTabbedPane2;
+    private javax.swing.JTabbedPane jTabbedPane3;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextArea jTextArea2;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextArea txtRuleHeader;
     // End of variables declaration//GEN-END:variables
     private javax.swing.JInternalFrame jInternalFrame10;
     private javax.swing.JLabel jLabel20;
     private List<SwingVisualComponent> visualComponents;
+    
     private void instantiateSwingComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
-        jLabel2 = new javax.swing.JLabel();
-        jTabbedPane1 = new javax.swing.JTabbedPane();
-        jDesktopPane1 = new javax.swing.JDesktopPane();
-        jInternalFrame1 = new javax.swing.JInternalFrame();
-        jLabel3 = new javax.swing.JLabel();
-        jInternalFrame2 = new javax.swing.JInternalFrame();
-        jLabel4 = new javax.swing.JLabel();
-        jInternalFrame3 = new javax.swing.JInternalFrame();
-        jLabel5 = new javax.swing.JLabel();
-        jInternalFrame6 = new javax.swing.JInternalFrame();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jDesktopPane2 = new javax.swing.JDesktopPane();
-        jInternalFrame4 = new javax.swing.JInternalFrame();
+//        jScrollPane1 = new javax.swing.JScrollPane();
+//        jTextArea1 = new javax.swing.JTextArea();
+//        jLabel2 = new javax.swing.JLabel();
+//        jDesktopPane1 = new javax.swing.JDesktopPane();
+//        jInternalFrame1 = new javax.swing.JInternalFrame();
+//        jLabel3 = new javax.swing.JLabel();
+//        jInternalFrame2 = new javax.swing.JInternalFrame();
+//        jLabel4 = new javax.swing.JLabel();
+//        jInternalFrame3 = new javax.swing.JInternalFrame();
+//        jLabel5 = new javax.swing.JLabel();
+//        jInternalFrame6 = new javax.swing.JInternalFrame();
+//        jButton1 = new javax.swing.JButton();
+//        jButton2 = new javax.swing.JButton();
+//        jDesktopPane2 = new javax.swing.JDesktopPane();
+//        jInternalFrame4 = new javax.swing.JInternalFrame();
+        
         visualComponents = new ArrayList<SwingVisualComponent>();
 
 
-        jTextArea2 = new javax.swing.JTextArea();
-
-        jButton5 = new javax.swing.JButton();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        jButton6 = new javax.swing.JButton();
-        jButton7 = new javax.swing.JButton();
-        jTextField2 = new javax.swing.JTextField();
+//        jTextArea2 = new javax.swing.JTextArea();
+//
+//        jButton5 = new javax.swing.JButton();
+//        jScrollPane3 = new javax.swing.JScrollPane();
+//        jButton6 = new javax.swing.JButton();
+//        jButton7 = new javax.swing.JButton();
+//        jTextField2 = new javax.swing.JTextField();
 
     }
 
     private void myInitComponents() {
-
-
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-
-
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-
-        jScrollPane1.setViewportView(jTextArea1);
-
-        jLabel2.setText("Notifications:");
-
-        jDesktopPane1.addFocusListener(new java.awt.event.FocusAdapter() {
-
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                MainPage.this.focusGained(evt);
-            }
-        });
-
-
         SwingVisualComponent product1Component = new SwingVisualComponent("Product 1", 30, 30);
         visualComponents.add(product1Component);
-        jInternalFrame1 = product1Component.getFrame();
-        jDesktopPane1.add(jInternalFrame1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        JInternalFrame internalFrame = product1Component.getFrame();
+        internalFrame.addMouseListener(new MouseAdapter() {
+
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                internalFrameMouseClicked(e);
+            }
+            
+        });
+        jDesktopPane1.add(internalFrame, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
 
         SwingVisualComponent product2Component = new SwingVisualComponent("Product 2", 280, 30);
         visualComponents.add(product2Component);
-        jInternalFrame2 = product2Component.getFrame();
+        internalFrame = product2Component.getFrame();
+        internalFrame.addMouseListener(new MouseAdapter() {
 
-        jDesktopPane1.add(jInternalFrame2, javax.swing.JLayeredPane.DEFAULT_LAYER);
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                internalFrameMouseClicked(e);
+            }
+            
+        });
+        jDesktopPane1.add(internalFrame, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
 
         SwingVisualComponent product3Component = new SwingVisualComponent("Product 3", 530, 30);
         visualComponents.add(product3Component);
-        jInternalFrame3 = product3Component.getFrame();
-        jDesktopPane1.add(jInternalFrame3, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        internalFrame = product3Component.getFrame();
+        internalFrame.addMouseListener(new MouseAdapter() {
 
-
-        //Button Frame
-        jInternalFrame6.setVisible(true);
-        jInternalFrame6.setClosable(true);
-        jInternalFrame6.setIconifiable(true);
-        jInternalFrame6.setMaximizable(true);
-        jInternalFrame6.setResizable(true);
-        jInternalFrame6.setVisible(true);
-        jInternalFrame6.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                jInternalFrame6FocusLost(evt);
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                internalFrameMouseClicked(e);
             }
+            
         });
-        jButton1.setText("Buy Product 1");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
-        jButton2.setText("Add Banner");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
+        jDesktopPane1.add(internalFrame, javax.swing.JLayeredPane.DEFAULT_LAYER);
         
-        jButton7.setText("Add Component");
-        jButton7.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton7ActionPerformed(evt);
-            }
-        });
-
-       org.jdesktop.layout.GroupLayout jInternalFrame6Layout = new org.jdesktop.layout.GroupLayout(jInternalFrame6.getContentPane());
-        jInternalFrame6.getContentPane().setLayout(jInternalFrame6Layout);
-        jInternalFrame6Layout.setHorizontalGroup(
-            jInternalFrame6Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(jInternalFrame6Layout.createSequentialGroup()
-                .addContainerGap()
-                .add(jInternalFrame6Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(jButton1)
-                    .add(jButton2)
-                    .add(org.jdesktop.layout.GroupLayout.TRAILING, jInternalFrame6Layout.createSequentialGroup()
-                        .add(jTextField2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 96, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .add(jButton7)))
-                .addContainerGap())
-        );
-        jInternalFrame6Layout.setVerticalGroup(
-            jInternalFrame6Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(jInternalFrame6Layout.createSequentialGroup()
-                .add(jButton1)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
-                .add(jButton2)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(jInternalFrame6Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(jButton7)
-                    .add(jTextField2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
-        );
-        jInternalFrame6.setBounds(310, 200, 300, 161);
-        jDesktopPane1.add(jInternalFrame6, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
-        jTabbedPane1.addTab("Main Section", jDesktopPane1);
-
-
-
-
-        jInternalFrame4.setTitle("Management Tab");
-        jInternalFrame4.setVisible(true);
-
-        jButton5.setText("Refresh");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
-
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
-            }
-        });
-
-        jTextArea2.setColumns(20);
-        jTextArea2.setRows(5);
-        jScrollPane3.setViewportView(jTextArea2);
-
-        jButton6.setText("Apply");
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
-
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
-            }
-        });
-
-        org.jdesktop.layout.GroupLayout jInternalFrame4Layout = new org.jdesktop.layout.GroupLayout(jInternalFrame4.getContentPane());
-        jInternalFrame4.getContentPane().setLayout(jInternalFrame4Layout);
-        jInternalFrame4Layout.setHorizontalGroup(
-                jInternalFrame4Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING).add(org.jdesktop.layout.GroupLayout.TRAILING, jInternalFrame4Layout.createSequentialGroup().addContainerGap().add(jScrollPane3, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 687, Short.MAX_VALUE).addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED).add(jInternalFrame4Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING).add(jButton5).add(jButton6)).addContainerGap()));
-        jInternalFrame4Layout.setVerticalGroup(
-                jInternalFrame4Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING).add(jInternalFrame4Layout.createSequentialGroup().add(jInternalFrame4Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING).add(jInternalFrame4Layout.createSequentialGroup().add(224, 224, 224).add(jButton5).addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED).add(jButton6)).add(jInternalFrame4Layout.createSequentialGroup().addContainerGap().add(jScrollPane3, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 262, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))).addContainerGap(38, Short.MAX_VALUE)));
-
-        jInternalFrame4.setBounds(10, 10, 850, 370);
-        jDesktopPane2.add(jInternalFrame4, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
-        jTabbedPane1.addTab("Management Tab", jDesktopPane2);
-
-        org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-                layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING).add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup().addContainerGap().add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING).add(org.jdesktop.layout.GroupLayout.LEADING, jTabbedPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 899, Short.MAX_VALUE).add(org.jdesktop.layout.GroupLayout.LEADING, jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 899, Short.MAX_VALUE).add(org.jdesktop.layout.GroupLayout.LEADING, jLabel2)).addContainerGap()));
-        layout.setVerticalGroup(
-                layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING).add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup().addContainerGap().add(jTabbedPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 429, Short.MAX_VALUE).addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED).add(jLabel2).add(18, 18, 18).add(jScrollPane1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE).addContainerGap()));
-
         pack();
+        
+//
+//
+//        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+//
+//
+//        jTextArea1.setColumns(20);
+//        jTextArea1.setRows(5);
+//
+//        jScrollPane1.setViewportView(jTextArea1);
+//
+//        jLabel2.setText("Notifications:");
+//
+//        jDesktopPane1.addFocusListener(new java.awt.event.FocusAdapter() {
+//
+//            public void focusGained(java.awt.event.FocusEvent evt) {
+//                MainPage.this.focusGained(evt);
+//            }
+//        });
+//
+//
+//        SwingVisualComponent product1Component = new SwingVisualComponent("Product 1", 30, 30);
+//        visualComponents.add(product1Component);
+//        jInternalFrame1 = product1Component.getFrame();
+//        jDesktopPane1.add(jInternalFrame1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+//
+//
+//        SwingVisualComponent product2Component = new SwingVisualComponent("Product 2", 280, 30);
+//        visualComponents.add(product2Component);
+//        jInternalFrame2 = product2Component.getFrame();
+//
+//        jDesktopPane1.add(jInternalFrame2, javax.swing.JLayeredPane.DEFAULT_LAYER);
+//
+//
+//        SwingVisualComponent product3Component = new SwingVisualComponent("Product 3", 530, 30);
+//        visualComponents.add(product3Component);
+//        jInternalFrame3 = product3Component.getFrame();
+//        jDesktopPane1.add(jInternalFrame3, javax.swing.JLayeredPane.DEFAULT_LAYER);
+//
+//
+//        //Button Frame
+//        jInternalFrame6.setVisible(true);
+//        jInternalFrame6.setClosable(true);
+//        jInternalFrame6.setIconifiable(true);
+//        jInternalFrame6.setMaximizable(true);
+//        jInternalFrame6.setResizable(true);
+//        jInternalFrame6.setVisible(true);
+//        jInternalFrame6.addFocusListener(new java.awt.event.FocusAdapter() {
+//            public void focusLost(java.awt.event.FocusEvent evt) {
+//                jInternalFrame6FocusLost(evt);
+//            }
+//        });
+//        jButton1.setText("Buy Product 1");
+//        jButton1.addActionListener(new java.awt.event.ActionListener() {
+//
+//            public void actionPerformed(java.awt.event.ActionEvent evt) {
+//                jButton1ActionPerformed(evt);
+//            }
+//        });
+//
+//        jButton2.setText("Add Banner");
+//        jButton2.addActionListener(new java.awt.event.ActionListener() {
+//
+//            public void actionPerformed(java.awt.event.ActionEvent evt) {
+//                jButton2ActionPerformed(evt);
+//            }
+//        });
+//        
+//        jButton7.setText("Add Component");
+//        jButton7.addActionListener(new java.awt.event.ActionListener() {
+//            public void actionPerformed(java.awt.event.ActionEvent evt) {
+//                jButton7ActionPerformed(evt);
+//            }
+//        });
+//
+//       org.jdesktop.layout.GroupLayout jInternalFrame6Layout = new org.jdesktop.layout.GroupLayout(jInternalFrame6.getContentPane());
+//        jInternalFrame6.getContentPane().setLayout(jInternalFrame6Layout);
+//        jInternalFrame6Layout.setHorizontalGroup(
+//            jInternalFrame6Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+//            .add(jInternalFrame6Layout.createSequentialGroup()
+//                .addContainerGap()
+//                .add(jInternalFrame6Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+//                    .add(jButton1)
+//                    .add(jButton2)
+//                    .add(org.jdesktop.layout.GroupLayout.TRAILING, jInternalFrame6Layout.createSequentialGroup()
+//                        .add(jTextField2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 96, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+//                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+//                        .add(jButton7)))
+//                .addContainerGap())
+//        );
+//        jInternalFrame6Layout.setVerticalGroup(
+//            jInternalFrame6Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+//            .add(jInternalFrame6Layout.createSequentialGroup()
+//                .add(jButton1)
+//                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+//                .add(jButton2)
+//                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+//                .add(jInternalFrame6Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+//                    .add(jButton7)
+//                    .add(jTextField2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+//                .addContainerGap())
+//        );
+//        jInternalFrame6.setBounds(310, 200, 300, 161);
+//        jDesktopPane1.add(jInternalFrame6, javax.swing.JLayeredPane.DEFAULT_LAYER);
+//
+//        jInternalFrame4.setTitle("Management Tab");
+//        jInternalFrame4.setVisible(true);
+//
+//        jButton5.setText("Refresh");
+//        jButton5.addActionListener(new java.awt.event.ActionListener() {
+//
+//            public void actionPerformed(java.awt.event.ActionEvent evt) {
+//                jButton5ActionPerformed(evt);
+//            }
+//        });
+//
+//        jTextArea2.setColumns(20);
+//        jTextArea2.setRows(5);
+//        jScrollPane3.setViewportView(jTextArea2);
+//
+//        jButton6.setText("Apply");
+//        jButton6.addActionListener(new java.awt.event.ActionListener() {
+//
+//            public void actionPerformed(java.awt.event.ActionEvent evt) {
+//                jButton6ActionPerformed(evt);
+//            }
+//        });
+//
+//        org.jdesktop.layout.GroupLayout jInternalFrame4Layout = new org.jdesktop.layout.GroupLayout(jInternalFrame4.getContentPane());
+//        jInternalFrame4.getContentPane().setLayout(jInternalFrame4Layout);
+//        jInternalFrame4Layout.setHorizontalGroup(
+//                jInternalFrame4Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING).add(org.jdesktop.layout.GroupLayout.TRAILING, jInternalFrame4Layout.createSequentialGroup().addContainerGap().add(jScrollPane3, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 687, Short.MAX_VALUE).addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED).add(jInternalFrame4Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING).add(jButton5).add(jButton6)).addContainerGap()));
+//        jInternalFrame4Layout.setVerticalGroup(
+//                jInternalFrame4Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING).add(jInternalFrame4Layout.createSequentialGroup().add(jInternalFrame4Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING).add(jInternalFrame4Layout.createSequentialGroup().add(224, 224, 224).add(jButton5).addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED).add(jButton6)).add(jInternalFrame4Layout.createSequentialGroup().addContainerGap().add(jScrollPane3, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 262, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))).addContainerGap(38, Short.MAX_VALUE)));
+//
+//        jInternalFrame4.setBounds(10, 10, 850, 370);
+//        jDesktopPane2.add(jInternalFrame4, javax.swing.JLayeredPane.DEFAULT_LAYER);
+//
+//        org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());
+//        getContentPane().setLayout(layout);
+//
+//        pack();
 
 
     }

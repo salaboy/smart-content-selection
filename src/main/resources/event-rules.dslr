@@ -34,6 +34,7 @@ declare SearchTriggeredEvent
     @role( event )
 end
 
+// <--Body-->
 
 rule " Three visits product 1, tag it"
    when
@@ -111,22 +112,3 @@ rule "Quickly Buy after Threshold Reached! "
     then
        Add notification: "Thanks for buying so quickly!!! :) ";
 end
-
-//Based on focus sliding windows, create time based hot-topic lists
-
-//Based on based on links and time windows create a list of interest / hot-topics and discard non interesting ones
-
-//Filters based on categories and time between filters
-
-// User Mode : General Search, Read Information, Looking for something in particular
-
-//Interest Search: textbox for describe interest terms, we will look for metadata into the different components available and we will suggest filters
-// that can lead to relevant products
-
-//Create situation that requires a business process for a campaign creation
-
-
-
-
-
-
