@@ -25,6 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.FocusManager;
 import javax.swing.JInternalFrame;
 import javax.swing.JTextArea;
 import org.drools.KnowledgeBase;
@@ -74,7 +75,7 @@ public class MainPage extends javax.swing.JDialog {
         kbuilder.add(new ClassPathResource("event-rules.dsl"), ResourceType.DSL);
         
         
-        String rules = txtRuleHeader.getText()+"\n\n"+jTextArea2.getText();
+        String rules = txtRuleHeader.getText()+"\n\n"+txtRuleBody.getText();
         kbuilder.add(new ByteArrayResource(rules.getBytes()), ResourceType.DSLR);
         //Check for errors during the compilation of the rules
         KnowledgeBuilderErrors errors = kbuilder.getErrors();
@@ -149,13 +150,15 @@ public class MainPage extends javax.swing.JDialog {
         jTextField1 = new javax.swing.JTextField();
         jButton4 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
-        jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
         jTabbedPane2 = new javax.swing.JTabbedPane();
+        jPanel2 = new javax.swing.JPanel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        txtRuleBody = new javax.swing.JTextArea();
+        jToolBar1 = new javax.swing.JToolBar();
+        btnAddNewRule = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         txtRuleHeader = new javax.swing.JTextArea();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        jTextArea2 = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -335,13 +338,6 @@ public class MainPage extends javax.swing.JDialog {
 
         jTabbedPane3.addTab("Customer Page", jDesktopPane1);
 
-        jButton5.setText("Refresh");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
-            }
-        });
-
         jButton6.setText("Apply");
         jButton6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -350,6 +346,55 @@ public class MainPage extends javax.swing.JDialog {
         });
 
         jTabbedPane2.setTabPlacement(javax.swing.JTabbedPane.LEFT);
+        jTabbedPane2.setName("Rules"); // NOI18N
+
+        jScrollPane3.setName("Rules"); // NOI18N
+
+        txtRuleBody.setColumns(20);
+        txtRuleBody.setRows(5);
+        jScrollPane3.setViewportView(txtRuleBody);
+
+        jToolBar1.setRollover(true);
+
+        btnAddNewRule.setText("Add New Rule");
+        btnAddNewRule.setFocusable(false);
+        btnAddNewRule.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnAddNewRule.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnAddNewRule.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddNewRuleActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(btnAddNewRule);
+
+        org.jdesktop.layout.GroupLayout jPanel2Layout = new org.jdesktop.layout.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .add(jToolBar1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 703, Short.MAX_VALUE)
+                .addContainerGap())
+            .add(jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                .add(jPanel2Layout.createSequentialGroup()
+                    .addContainerGap()
+                    .add(jScrollPane3, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 707, Short.MAX_VALUE)
+                    .add(8, 8, 8)))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .add(jToolBar1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 25, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(372, Short.MAX_VALUE))
+            .add(jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanel2Layout.createSequentialGroup()
+                    .add(37, 37, 37)
+                    .add(jScrollPane3, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 360, Short.MAX_VALUE)
+                    .addContainerGap()))
+        );
+
+        jTabbedPane2.addTab("Rules", jPanel2);
 
         jScrollPane2.setName("Header"); // NOI18N
 
@@ -359,38 +404,22 @@ public class MainPage extends javax.swing.JDialog {
 
         jTabbedPane2.addTab("Header", jScrollPane2);
 
-        jScrollPane3.setName("Rules"); // NOI18N
-
-        jTextArea2.setColumns(20);
-        jTextArea2.setRows(5);
-        jScrollPane3.setViewportView(jTextArea2);
-
-        jTabbedPane2.addTab("Rules", jScrollPane3);
-
-        jTabbedPane2.setSelectedIndex(1);
-
         org.jdesktop.layout.GroupLayout jPanel1Layout = new org.jdesktop.layout.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanel1Layout.createSequentialGroup()
-                .add(jTabbedPane2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 806, Short.MAX_VALUE)
+                .add(jTabbedPane2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 800, Short.MAX_VALUE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(jButton5)
-                    .add(jButton6))
-                .addContainerGap())
+                .add(jButton6)
+                .add(35, 35, 35))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(jPanel1Layout.createSequentialGroup()
                 .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(jPanel1Layout.createSequentialGroup()
-                        .add(224, 224, 224)
-                        .add(jButton5)
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                        .add(jButton6))
-                    .add(jTabbedPane2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 417, Short.MAX_VALUE))
+                    .add(jTabbedPane2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 417, Short.MAX_VALUE)
+                    .add(jButton6))
                 .addContainerGap())
         );
 
@@ -428,10 +457,6 @@ public class MainPage extends javax.swing.JDialog {
         initDrools();
         updateCurrentVisualStatus();
 }//GEN-LAST:event_jButton6ActionPerformed
-
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        loadRulesFromFile();
-    }//GEN-LAST:event_jButton5ActionPerformed
 
     private void focusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_focusGained
         
@@ -504,6 +529,27 @@ public class MainPage extends javax.swing.JDialog {
         ksession.getWorkingMemoryEntryPoint("buy-product-stream").insert(new BuyProductEvent());
 }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void btnAddNewRuleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddNewRuleActionPerformed
+        String newRule = "\n\nrule \"<|>\"\n    when\n        \n    then\nend";
+        txtRuleBody.append(newRule);
+        this.updateCursorPositionInRulesBody();
+    }//GEN-LAST:event_btnAddNewRuleActionPerformed
+
+    private void updateCursorPositionInRulesBody(){
+        String rules = txtRuleBody.getText();
+        
+        int indexOfCursorPlaceHolder = rules.indexOf("<|>");
+        if (indexOfCursorPlaceHolder < 0){
+            return;
+        }
+        
+        rules = rules.replaceAll("<\\|>", "");
+        txtRuleBody.setText(rules);
+        
+        txtRuleBody.setCaretPosition(indexOfCursorPlaceHolder);
+        txtRuleBody.requestFocusInWindow();
+    }
+    
     public void myFocusGained(java.awt.event.FocusEvent evt) {
         if (evt.getComponent() instanceof JInternalFrame) {
             jTextArea1.setText(((JInternalFrame) evt.getComponent()).getTitle());
@@ -550,11 +596,11 @@ public class MainPage extends javax.swing.JDialog {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAddNewRule;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JCheckBox jCheckBox1;
@@ -567,15 +613,17 @@ public class MainPage extends javax.swing.JDialog {
     private javax.swing.JInternalFrame jInternalFrame8;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JTabbedPane jTabbedPane3;
     private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextArea jTextArea2;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
+    private javax.swing.JToolBar jToolBar1;
+    private javax.swing.JTextArea txtRuleBody;
     private javax.swing.JTextArea txtRuleHeader;
     // End of variables declaration//GEN-END:variables
     private javax.swing.JInternalFrame jInternalFrame10;
@@ -641,7 +689,7 @@ public class MainPage extends javax.swing.JDialog {
     }
 
     private void loadRulesFromFile() {
-        jTextArea2.setText("");
+        txtRuleBody.setText("");
         txtRuleHeader.setText("");
         BufferedReader in = null;
         try {
@@ -652,7 +700,7 @@ public class MainPage extends javax.swing.JDialog {
             String line = null;
             while ((line = in.readLine()) != null) {
                 if (line.contains("<--Body-->")){
-                    currentTextArea = jTextArea2;
+                    currentTextArea = txtRuleBody;
                 }
                 currentTextArea.append(line+ "\n");
             }
