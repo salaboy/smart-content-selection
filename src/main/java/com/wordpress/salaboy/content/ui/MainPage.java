@@ -22,12 +22,14 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.FocusManager;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JInternalFrame;
 import javax.swing.JTextArea;
+import javax.swing.event.ListDataListener;
 import org.drools.KnowledgeBase;
 import org.drools.KnowledgeBaseConfiguration;
 import org.drools.KnowledgeBaseFactory;
@@ -52,6 +54,9 @@ import org.drools.runtime.conf.ClockTypeOption;
  */
 public class MainPage extends javax.swing.JDialog {
 
+    public static final String CBO_DSL_CONDITIONS_TEXT = "----- Conditions ------";
+    public static final String CBO_DSL_CONSEQUENCES_TEXT = "----- Consequences ------";
+    
     private StatefulKnowledgeSession ksession = null;
 
     /** Creates new form MainPage */
@@ -157,6 +162,8 @@ public class MainPage extends javax.swing.JDialog {
         txtRuleBody = new javax.swing.JTextArea();
         jToolBar1 = new javax.swing.JToolBar();
         btnAddNewRule = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        cboDSL = new javax.swing.JComboBox();
         jScrollPane2 = new javax.swing.JScrollPane();
         txtRuleHeader = new javax.swing.JTextArea();
 
@@ -367,6 +374,17 @@ public class MainPage extends javax.swing.JDialog {
         });
         jToolBar1.add(btnAddNewRule);
 
+        jLabel1.setText("Sentences:");
+        jToolBar1.add(jLabel1);
+
+        cboDSL.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cboDSL.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cboDSLActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(cboDSL);
+
         org.jdesktop.layout.GroupLayout jPanel2Layout = new org.jdesktop.layout.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -530,20 +548,36 @@ public class MainPage extends javax.swing.JDialog {
 }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btnAddNewRuleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddNewRuleActionPerformed
-        String newRule = "\n\nrule \"<|>\"\n    when\n        \n    then\nend";
+        String newRule = "\n\nrule \"<|>\"\n    when\n        \n    then\n        \nend";
         txtRuleBody.append(newRule);
         this.updateCursorPositionInRulesBody();
     }//GEN-LAST:event_btnAddNewRuleActionPerformed
 
+    private void cboDSLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboDSLActionPerformed
+        String item = (String) cboDSL.getSelectedItem();
+        if (item.equals(CBO_DSL_CONDITIONS_TEXT) || item.equals(CBO_DSL_CONSEQUENCES_TEXT)){
+            return;
+        }
+        item = item.replaceAll("\\{[a-zA-Z]+\\}", "<|>");
+        txtRuleBody.insert(item+"\n", txtRuleBody.getCaretPosition());
+        this.updateCursorPositionInRulesBody();
+    }//GEN-LAST:event_cboDSLActionPerformed
+
     private void updateCursorPositionInRulesBody(){
         String rules = txtRuleBody.getText();
         
+        //Get the first position of <|>
         int indexOfCursorPlaceHolder = rules.indexOf("<|>");
         if (indexOfCursorPlaceHolder < 0){
             return;
         }
         
-        rules = rules.replaceAll("<\\|>", "");
+        //The caret is going to be placed in the first <|>
+        rules = rules.replaceFirst("<\\|>", "");
+        
+        //The rest of the <|> are replaced by |
+        rules = rules.replaceAll("<\\|>", "|");
+        
         txtRuleBody.setText(rules);
         
         txtRuleBody.setCaretPosition(indexOfCursorPlaceHolder);
@@ -597,6 +631,7 @@ public class MainPage extends javax.swing.JDialog {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddNewRule;
+    private javax.swing.JComboBox cboDSL;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -611,6 +646,7 @@ public class MainPage extends javax.swing.JDialog {
     private javax.swing.JInternalFrame jInternalFrame6;
     private javax.swing.JInternalFrame jInternalFrame7;
     private javax.swing.JInternalFrame jInternalFrame8;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -689,6 +725,7 @@ public class MainPage extends javax.swing.JDialog {
     }
 
     private void loadRulesFromFile() {
+        //Rules -> TextAreas
         txtRuleBody.setText("");
         txtRuleHeader.setText("");
         BufferedReader in = null;
@@ -701,9 +738,57 @@ public class MainPage extends javax.swing.JDialog {
             while ((line = in.readLine()) != null) {
                 if (line.contains("<--Body-->")){
                     currentTextArea = txtRuleBody;
+                    continue;
                 }
                 currentTextArea.append(line+ "\n");
             }
+        } catch (IOException ex) {
+            Logger.getLogger(MainPage.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                in.close();
+            } catch (IOException ex) {
+                Logger.getLogger(MainPage.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
+        //DSL -> Combo
+        DefaultComboBoxModel cboDSLModel = new DefaultComboBoxModel();
+        try {
+            in = new BufferedReader(new InputStreamReader(new ClassPathResource("event-rules.dsl").getInputStream()));
+            
+            List<String> conditions = new ArrayList<String>();
+            List<String> consequences = new ArrayList<String>();
+            
+            String line = null;
+            while ((line = in.readLine()) != null) {
+                line = line.trim();
+                if (line.isEmpty()){
+                    continue;
+                }
+
+                String text = line;
+                text = text.substring(text.indexOf("[]")+2,text.indexOf("="));
+                
+                if (line.startsWith("[condition][]")){
+                    conditions.add(text);
+                }else if (line.startsWith("[consequence][]")){
+                    consequences.add(text);
+                }
+            }
+            
+            Collections.sort(conditions);
+            Collections.sort(consequences);
+            
+            cboDSLModel.addElement(CBO_DSL_CONDITIONS_TEXT);
+            for (String c : conditions) {
+                cboDSLModel.addElement(c);
+            }
+            cboDSLModel.addElement(CBO_DSL_CONSEQUENCES_TEXT);
+            for (String c : consequences) {
+                cboDSLModel.addElement(c);
+            }
+            cboDSL.setModel(cboDSLModel);
         } catch (IOException ex) {
             Logger.getLogger(MainPage.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
