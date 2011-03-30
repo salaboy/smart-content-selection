@@ -22,8 +22,10 @@ import java.awt.event.MouseEvent;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -52,12 +54,14 @@ import org.drools.runtime.conf.ClockTypeOption;
  *
  * @author salaboy
  */
-public class MainPage extends javax.swing.JDialog {
+public class MainPage extends javax.swing.JDialog implements Notifiable {
 
     public static final String CBO_DSL_CONDITIONS_TEXT = "----- Conditions ------";
     public static final String CBO_DSL_CONSEQUENCES_TEXT = "----- Consequences ------";
     
     private StatefulKnowledgeSession ksession = null;
+    
+    private SimpleDateFormat sdf = new SimpleDateFormat("hh:mm:ss:SS");
 
     /** Creates new form MainPage */
     public MainPage(java.awt.Frame parent, boolean modal) {
@@ -105,17 +109,17 @@ public class MainPage extends javax.swing.JDialog {
         for(Rule rule : kbase.getKnowledgePackages().iterator().next().getRules()){
             deployedRules += " - " + rule.getName() + "\n";
         }
-        jTextArea1.setText(jTextArea1.getText() + "\n Deployed Rules: "+ deployedRules);
+        this.addNotification(txtNotifications.getText() + "\n Deployed Rules: "+ deployedRules);
         KnowledgeSessionConfiguration kconfig = KnowledgeBaseFactory.newKnowledgeSessionConfiguration();
         kconfig.setOption(ClockTypeOption.get("realtime"));
-        jTextArea1.setText(jTextArea1.getText() + "\n New Session Was Created!");
+        this.addNotification(txtNotifications.getText() + "\n New Session Was Created!");
         ksession = kbase.newStatefulKnowledgeSession(kconfig, null);
 
         // We can add a runtime logger to understand what is going on inside the
         // Engine
         KnowledgeRuntimeLoggerFactory.newConsoleLogger(ksession);
         ksession.addEventListener(new DebugAgendaEventListener());
-        ksession.setGlobal("notifications", jTextArea1);
+        ksession.setGlobal("notifications", this);
         ksession.setGlobal("panel", jDesktopPane1);
         
         //we insert a new ShoppingCart
@@ -140,7 +144,7 @@ public class MainPage extends javax.swing.JDialog {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        txtNotifications = new javax.swing.JTextArea();
         jLabel2 = new javax.swing.JLabel();
         jTabbedPane3 = new javax.swing.JTabbedPane();
         jDesktopPane1 = new javax.swing.JDesktopPane();
@@ -169,12 +173,13 @@ public class MainPage extends javax.swing.JDialog {
         cboDSL = new javax.swing.JComboBox();
         jScrollPane2 = new javax.swing.JScrollPane();
         txtRuleHeader = new javax.swing.JTextArea();
+        btnClearNotifications = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        txtNotifications.setColumns(20);
+        txtNotifications.setRows(5);
+        jScrollPane1.setViewportView(txtNotifications);
 
         jLabel2.setText("Notifications:");
 
@@ -225,7 +230,7 @@ public class MainPage extends javax.swing.JDialog {
                     .add(jCheckBox4)
                     .add(jButton3)
                     .add(jCheckBox1))
-                .addContainerGap(59, Short.MAX_VALUE))
+                .addContainerGap(78, Short.MAX_VALUE))
         );
         jInternalFrame7Layout.setVerticalGroup(
             jInternalFrame7Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -268,12 +273,12 @@ public class MainPage extends javax.swing.JDialog {
                 .add(jTextField1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 105, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(jButton4, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 48, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(47, Short.MAX_VALUE))
         );
         jInternalFrame8Layout.setVerticalGroup(
             jInternalFrame8Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(org.jdesktop.layout.GroupLayout.TRAILING, jInternalFrame8Layout.createSequentialGroup()
-                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(37, Short.MAX_VALUE)
                 .add(jInternalFrame8Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(jTextField1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                     .add(jButton4))
@@ -305,7 +310,7 @@ public class MainPage extends javax.swing.JDialog {
                 .add(jTextField2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 96, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(jButton7)
-                .addContainerGap(579, Short.MAX_VALUE))
+                .addContainerGap(629, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -315,7 +320,7 @@ public class MainPage extends javax.swing.JDialog {
                     .add(jLabel1)
                     .add(jTextField2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                     .add(jButton7))
-                .addContainerGap(352, Short.MAX_VALUE))
+                .addContainerGap(348, Short.MAX_VALUE))
         );
 
         jTabbedPane3.addTab("Add Content Tab", jPanel3);
@@ -366,12 +371,12 @@ public class MainPage extends javax.swing.JDialog {
             jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .add(jToolBar1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 643, Short.MAX_VALUE)
+                .add(jToolBar1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 671, Short.MAX_VALUE)
                 .addContainerGap())
             .add(jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                 .add(jPanel2Layout.createSequentialGroup()
                     .addContainerGap()
-                    .add(jScrollPane3, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 655, Short.MAX_VALUE)
+                    .add(jScrollPane3, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 675, Short.MAX_VALUE)
                     .add(8, 8, 8)))
         );
         jPanel2Layout.setVerticalGroup(
@@ -379,11 +384,11 @@ public class MainPage extends javax.swing.JDialog {
             .add(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .add(jToolBar1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 25, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(345, Short.MAX_VALUE))
+                .addContainerGap(360, Short.MAX_VALUE))
             .add(jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                 .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanel2Layout.createSequentialGroup()
                     .add(37, 37, 37)
-                    .add(jScrollPane3, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 333, Short.MAX_VALUE)
+                    .add(jScrollPane3, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 348, Short.MAX_VALUE)
                     .addContainerGap()))
         );
 
@@ -402,7 +407,7 @@ public class MainPage extends javax.swing.JDialog {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanel1Layout.createSequentialGroup()
-                .add(jTabbedPane2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 729, Short.MAX_VALUE)
+                .add(jTabbedPane2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 768, Short.MAX_VALUE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(jButton6)
                 .add(67, 67, 67))
@@ -411,12 +416,19 @@ public class MainPage extends javax.swing.JDialog {
             jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(jPanel1Layout.createSequentialGroup()
                 .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(jTabbedPane2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 411, Short.MAX_VALUE)
+                    .add(jTabbedPane2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 405, Short.MAX_VALUE)
                     .add(jButton6))
                 .addContainerGap())
         );
 
         jTabbedPane3.addTab("Manegement Tab", jPanel1);
+
+        btnClearNotifications.setText("Clear");
+        btnClearNotifications.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnClearNotificationsActionPerformed(evt);
+            }
+        });
 
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -425,20 +437,25 @@ public class MainPage extends javax.swing.JDialog {
             .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
-                    .add(org.jdesktop.layout.GroupLayout.LEADING, jTabbedPane3, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 899, Short.MAX_VALUE)
                     .add(org.jdesktop.layout.GroupLayout.LEADING, jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 899, Short.MAX_VALUE)
-                    .add(org.jdesktop.layout.GroupLayout.LEADING, jLabel2))
+                    .add(org.jdesktop.layout.GroupLayout.LEADING, jTabbedPane3, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 899, Short.MAX_VALUE)
+                    .add(org.jdesktop.layout.GroupLayout.LEADING, layout.createSequentialGroup()
+                        .add(jLabel2)
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                        .add(btnClearNotifications)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .add(jTabbedPane3, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 467, Short.MAX_VALUE)
+                .add(jTabbedPane3, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 455, Short.MAX_VALUE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(jLabel2)
-                .add(18, 18, 18)
-                .add(jScrollPane1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(jLabel2)
+                    .add(btnClearNotifications))
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(jScrollPane1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 104, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -496,6 +513,10 @@ public class MainPage extends javax.swing.JDialog {
         this.updateCursorPositionInRulesBody();
     }//GEN-LAST:event_cboDSLActionPerformed
 
+    private void btnClearNotificationsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearNotificationsActionPerformed
+        this.clearNotifications();
+    }//GEN-LAST:event_btnClearNotificationsActionPerformed
+
     private void updateCursorPositionInRulesBody(){
         String rules = txtRuleBody.getText();
         
@@ -519,7 +540,7 @@ public class MainPage extends javax.swing.JDialog {
     
     public void myFocusGained(java.awt.event.FocusEvent evt) {
         if (evt.getComponent() instanceof JInternalFrame) {
-            jTextArea1.setText(((JInternalFrame) evt.getComponent()).getTitle());
+            this.addNotification(((JInternalFrame) evt.getComponent()).getTitle());
             ksession.getWorkingMemoryEntryPoint("visit-product-stream").insert(new ProductFocusGainedEvent(new Product(((JInternalFrame) evt.getComponent()).getTitle())));
 
         }
@@ -528,7 +549,7 @@ public class MainPage extends javax.swing.JDialog {
 
     public void myFocusLost(java.awt.event.FocusEvent evt) {
         if (evt.getComponent() instanceof JInternalFrame) {
-            jTextArea1.setText(((JInternalFrame) evt.getComponent()).getTitle());
+            this.addNotification(((JInternalFrame) evt.getComponent()).getTitle());
             ksession.getWorkingMemoryEntryPoint("visit-product-stream").insert(new ProductFocusLostEvent(new Product(((JInternalFrame) evt.getComponent()).getTitle())));
 
         }
@@ -564,6 +585,7 @@ public class MainPage extends javax.swing.JDialog {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddNewRule;
+    private javax.swing.JButton btnClearNotifications;
     private javax.swing.JComboBox cboDSL;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
@@ -587,10 +609,10 @@ public class MainPage extends javax.swing.JDialog {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JTabbedPane jTabbedPane3;
-    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JToolBar jToolBar1;
+    private javax.swing.JTextArea txtNotifications;
     private javax.swing.JTextArea txtRuleBody;
     private javax.swing.JTextArea txtRuleHeader;
     // End of variables declaration//GEN-END:variables
@@ -733,7 +755,16 @@ public class MainPage extends javax.swing.JDialog {
     }
 
     public void newBuy(String productName) {
-        jTextArea1.setText("Product "+productName+" added to shopping cart");
+        this.addNotification("Product "+productName+" added to shopping cart");
         ksession.getWorkingMemoryEntryPoint("buy-product-stream").insert(new BuyProductEvent(new Product(productName)));
+    }
+
+    public synchronized void addNotification(String text) {
+        this.txtNotifications.insert(sdf.format(new Date())+" - "+text+"\n", 0);
+        this.txtNotifications.setCaretPosition(0);
+    }
+    
+    public void clearNotifications() {
+        this.txtNotifications.setText("");
     }
 }

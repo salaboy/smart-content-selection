@@ -9,7 +9,7 @@ import javax.swing.JDesktopPane;
 import java.util.List;
 import java.util.ArrayList;
 
-global javax.swing.JTextArea notifications;
+global com.wordpress.salaboy.content.ui.Notifiable notifications;
 global javax.swing.JDesktopPane panel;
 
 declare ProductFocusGainedEvent

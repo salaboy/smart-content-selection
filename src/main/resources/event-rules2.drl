@@ -9,7 +9,7 @@ import javax.swing.JDesktopPane;
 import java.util.List;
 import java.util.ArrayList;
 
-global javax.swing.JTextArea notifications;
+global com.wordpress.salaboy.content.ui.Notifiable notifications;
 global javax.swing.JDesktopPane panel;
 
 declare ProductFocusGainedEvent
@@ -61,7 +61,7 @@ rule "Abandoned Shopping Cart"
        $shoppingCartEvent:ShoppingCartItemAddedEvent() from entry-point "buy-product-stream" 
        not (ShoppingCartCheckOutEvent(this after [0s,30s] $shoppingCartEvent) from entry-point "buy-product-stream")
     then
-       notifications.setText("Abandoned Shopping Cart"); 
+       notifications.addNotification("Abandoned Shopping Cart"); 
 end
 
 

@@ -9,7 +9,7 @@ import javax.swing.JDesktopPane;
 import java.util.List;
 import java.util.ArrayList;
 
-global javax.swing.JTextArea notifications;
+global com.wordpress.salaboy.content.ui.Notifiable notifications;
 global javax.swing.JDesktopPane panel;
 
 declare ProductFocusGainedEvent
@@ -43,7 +43,7 @@ rule " Three visits product 1, tag it"
                                                             collectList($visit)
                                                  )
    then
-       notifications.setText("Three  Product 1 visits!!!");
+       notifications.addNotification("Three  Product 1 visits!!!");
        kcontext.getKnowledgeRuntime().getWorkingMemoryEntryPoint("buy-product-stream")
                         .insert(new VisitThresholdReachedEvent($n, ((ProductFocusGainedEvent)$list.get(0)).getProduct()));
        
@@ -57,7 +57,7 @@ rule " Four visits for product 2, tag it"
                                                             collectList($visit)
                                                  )
    then
-       notifications.setText("Four Product 2 visits!!!");
+       notifications.addNotification("Four Product 2 visits!!!");
        kcontext.getKnowledgeRuntime().getWorkingMemoryEntryPoint("buy-product-stream")
                         .insert(new VisitThresholdReachedEvent($n, ((ProductFocusGainedEvent)$list.get(0)).getProduct()));
        
@@ -71,7 +71,7 @@ rule " Two visits for product 3, tag it"
                                                             collectList($visit)
                                                  )
    then
-       notifications.setText("Two Product 3 visits!!!");
+       notifications.addNotification("Two Product 3 visits!!!");
        kcontext.getKnowledgeRuntime().getWorkingMemoryEntryPoint("buy-product-stream")
                         .insert(new VisitThresholdReachedEvent($n, ((ProductFocusGainedEvent)$list.get(0)).getProduct()));
        
@@ -84,7 +84,7 @@ rule " Focus gained without focus lost 10s"
        not( ProductFocusLostEvent(product.category == "Product 1", this  after [0s,10s] $focusGained)  from entry-point "visit-product-stream")
                                                             
    then
-       notifications.setText("Are You Interested in This Product -> Find out More!");
+       notifications.addNotification("Are You Interested in This Product -> Find out More!");
        
        
 end
@@ -99,7 +99,7 @@ rule " Visits for product 1 followed by 3 and then 2 in two minutes"
                                                                                             from entry-point "visit-product-stream"
                                                  
    then
-       notifications.setText("1, 3, 2 Combo!");
+       notifications.addNotification("1, 3, 2 Combo!");
        List products = new ArrayList();
        products.add($product1);
        products.add($product2);
@@ -114,7 +114,7 @@ rule "when we get a  visit combo, insert the products for suggestions"
     when
        $combo: VisitComboEvent() from entry-point "buy-product-stream"
     then
-       notifications.setText("Products in the combo: "+$combo.getProducts().size()); 
+       notifications.addNotification("Products in the combo: "+$combo.getProducts().size()); 
       
        SwingVisualComponent product4Component = new SwingVisualComponent("You are may be interested in: Product 4", 280, 200);
        insert(product4Component);
@@ -131,7 +131,7 @@ rule "No Buy after Threshold Reached! "
       $thresholdReached: VisitThresholdReachedEvent($amount: amount) from entry-point "buy-product-stream"
       not( BuyProductEvent(this after[0s,10s] $thresholdReached)  )                                           
     then
-       notifications.setText("No Buy :( after 10s but VisitThreshold Reached ("+$amount+")!");
+       notifications.addNotification("No Buy :( after 10s but VisitThreshold Reached ("+$amount+")!");
        SwingVisualComponent bannerComponent = new SwingVisualComponent("Buy now 10% Discount on \n Product 1", 30, 200);
        insert(bannerComponent);
        panel.add(bannerComponent.getFrame(), javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -142,7 +142,7 @@ rule "Quickly Buy after Threshold Reached! "
       $thresholdReached: VisitThresholdReachedEvent($amount: amount) from entry-point "buy-product-stream"
       BuyProductEvent(this after[0s,10s] $thresholdReached) from entry-point "buy-product-stream"                                          
     then
-       notifications.setText("Thanks for buying so quickly!!! :) ");
+       notifications.addNotification("Thanks for buying so quickly!!! :) ");
        
 end
 

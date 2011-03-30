@@ -9,8 +9,8 @@
 [condition][]There is a BUY EVENT {seconds} seconds after {var}=BuyProductEvent(this after[0s,{seconds}s] {var}) from entry-point "buy-product-stream"
 [condition][]AND=and
 
-[consequence][]Add notification: "{notification}"=notifications.setText("{notification}"); 
-[consequence][]Add notification about COMBO EVENT SIZE=notifications.setText("Products in the combo: "+$combo.getProducts().size()); 
+[consequence][]Add notification: "{notification}"=notifications.addNotification("{notification}"); 
+[consequence][]Add notification about COMBO EVENT SIZE=notifications.addNotification("Products in the combo: "+$combo.getProducts().size()); 
 
 [consequence][]Add a VISIT THRESHOLD REACHED EVENT for the product=kcontext.getKnowledgeRuntime().getWorkingMemoryEntryPoint("buy-product-stream").insert(new VisitThresholdReachedEvent($n, ((ProductFocusGainedEvent)$list.get(0)).getProduct()));
 [consequence][]Create a new Product list -> {var}=List {var} = new ArrayList();
