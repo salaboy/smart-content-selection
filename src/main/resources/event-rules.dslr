@@ -91,7 +91,7 @@ rule "when we get a visit combo, insert the products for suggestions"
        There is a COMBO EVENT
     then
        Add notification about COMBO EVENT SIZE
-       Add a new SWING COMPONENT with title "You are maybe interested in: Product 4" in <280> <200>
+       Add a new SWING COMPONENT with title "You are maybe interested in: Product 4" for $combo.getProductCategoriesList() in <280> <200>
 end
 
 
@@ -102,7 +102,7 @@ rule "No Buy after Threshold Reached! "
       There is no BUY EVENT 10 seconds after $thresholdReached
     then
        Add notification: "No Buy :( after 10s but VisitThreshold Reached!";
-       Add a new SWING COMPONENT with title "Buy now 10% Discount on \n Product 1" in <30> <200>
+       Add a new SWING COMPONENT with title "Buy now 10% Discount on \n" for $thresholdReached.getProduct().getCategory() in <30> <200>
 end
 
 rule "Quickly Buy after Threshold Reached! "

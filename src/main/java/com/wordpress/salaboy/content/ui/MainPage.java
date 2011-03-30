@@ -140,11 +140,6 @@ public class MainPage extends javax.swing.JDialog {
         jLabel2 = new javax.swing.JLabel();
         jTabbedPane3 = new javax.swing.JTabbedPane();
         jDesktopPane1 = new javax.swing.JDesktopPane();
-        jInternalFrame6 = new javax.swing.JInternalFrame();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton7 = new javax.swing.JButton();
-        jTextField2 = new javax.swing.JTextField();
         jInternalFrame7 = new javax.swing.JInternalFrame();
         jCheckBox1 = new javax.swing.JCheckBox();
         jCheckBox2 = new javax.swing.JCheckBox();
@@ -154,6 +149,10 @@ public class MainPage extends javax.swing.JDialog {
         jInternalFrame8 = new javax.swing.JInternalFrame();
         jTextField1 = new javax.swing.JTextField();
         jButton4 = new javax.swing.JButton();
+        jPanel3 = new javax.swing.JPanel();
+        jTextField2 = new javax.swing.JTextField();
+        jButton7 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jButton6 = new javax.swing.JButton();
         jTabbedPane2 = new javax.swing.JTabbedPane();
@@ -162,7 +161,7 @@ public class MainPage extends javax.swing.JDialog {
         txtRuleBody = new javax.swing.JTextArea();
         jToolBar1 = new javax.swing.JToolBar();
         btnAddNewRule = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
         cboDSL = new javax.swing.JComboBox();
         jScrollPane2 = new javax.swing.JScrollPane();
         txtRuleHeader = new javax.swing.JTextArea();
@@ -182,69 +181,6 @@ public class MainPage extends javax.swing.JDialog {
                 MainPage.this.focusGained(evt);
             }
         });
-
-        jInternalFrame6.setClosable(true);
-        jInternalFrame6.setIconifiable(true);
-        jInternalFrame6.setMaximizable(true);
-        jInternalFrame6.setResizable(true);
-        jInternalFrame6.setVisible(true);
-        jInternalFrame6.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                jInternalFrame6FocusLost(evt);
-            }
-        });
-
-        jButton1.setText("Buy Product 1");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
-        jButton2.setText("Add Banner");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-
-        jButton7.setText("Add Component");
-        jButton7.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton7ActionPerformed(evt);
-            }
-        });
-
-        org.jdesktop.layout.GroupLayout jInternalFrame6Layout = new org.jdesktop.layout.GroupLayout(jInternalFrame6.getContentPane());
-        jInternalFrame6.getContentPane().setLayout(jInternalFrame6Layout);
-        jInternalFrame6Layout.setHorizontalGroup(
-            jInternalFrame6Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(jInternalFrame6Layout.createSequentialGroup()
-                .addContainerGap()
-                .add(jInternalFrame6Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(jButton1)
-                    .add(jButton2)
-                    .add(org.jdesktop.layout.GroupLayout.TRAILING, jInternalFrame6Layout.createSequentialGroup()
-                        .add(jTextField2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 96, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 52, Short.MAX_VALUE)
-                        .add(jButton7)))
-                .addContainerGap())
-        );
-        jInternalFrame6Layout.setVerticalGroup(
-            jInternalFrame6Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(jInternalFrame6Layout.createSequentialGroup()
-                .add(jButton1)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
-                .add(jButton2)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(jInternalFrame6Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(jButton7)
-                    .add(jTextField2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
-        );
-
-        jInternalFrame6.setBounds(310, 200, 300, 151);
-        jDesktopPane1.add(jInternalFrame6, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jInternalFrame7.setClosable(true);
         jInternalFrame7.setIconifiable(true);
@@ -285,7 +221,7 @@ public class MainPage extends javax.swing.JDialog {
                     .add(jCheckBox4)
                     .add(jButton3)
                     .add(jCheckBox1))
-                .addContainerGap(78, Short.MAX_VALUE))
+                .addContainerGap(59, Short.MAX_VALUE))
         );
         jInternalFrame7Layout.setVerticalGroup(
             jInternalFrame7Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -328,12 +264,12 @@ public class MainPage extends javax.swing.JDialog {
                 .add(jTextField1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 105, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(jButton4, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 48, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(47, Short.MAX_VALUE))
+                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jInternalFrame8Layout.setVerticalGroup(
             jInternalFrame8Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(org.jdesktop.layout.GroupLayout.TRAILING, jInternalFrame8Layout.createSequentialGroup()
-                .addContainerGap(37, Short.MAX_VALUE)
+                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .add(jInternalFrame8Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(jTextField1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                     .add(jButton4))
@@ -344,6 +280,41 @@ public class MainPage extends javax.swing.JDialog {
         jDesktopPane1.add(jInternalFrame8, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jTabbedPane3.addTab("Customer Page", jDesktopPane1);
+
+        jButton7.setText("Add");
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setText("Add Product:");
+
+        org.jdesktop.layout.GroupLayout jPanel3Layout = new org.jdesktop.layout.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .add(jLabel1)
+                .add(18, 18, 18)
+                .add(jTextField2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 96, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(jButton7)
+                .addContainerGap(579, Short.MAX_VALUE))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(jPanel3Layout.createSequentialGroup()
+                .add(39, 39, 39)
+                .add(jPanel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(jLabel1)
+                    .add(jTextField2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(jButton7))
+                .addContainerGap(352, Short.MAX_VALUE))
+        );
+
+        jTabbedPane3.addTab("Add Content Tab", jPanel3);
 
         jButton6.setText("Apply");
         jButton6.addActionListener(new java.awt.event.ActionListener() {
@@ -374,8 +345,8 @@ public class MainPage extends javax.swing.JDialog {
         });
         jToolBar1.add(btnAddNewRule);
 
-        jLabel1.setText("Sentences:");
-        jToolBar1.add(jLabel1);
+        jLabel3.setText("Sentences:");
+        jToolBar1.add(jLabel3);
 
         cboDSL.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         cboDSL.addActionListener(new java.awt.event.ActionListener() {
@@ -391,12 +362,12 @@ public class MainPage extends javax.swing.JDialog {
             jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .add(jToolBar1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 703, Short.MAX_VALUE)
+                .add(jToolBar1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 643, Short.MAX_VALUE)
                 .addContainerGap())
             .add(jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                 .add(jPanel2Layout.createSequentialGroup()
                     .addContainerGap()
-                    .add(jScrollPane3, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 707, Short.MAX_VALUE)
+                    .add(jScrollPane3, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 655, Short.MAX_VALUE)
                     .add(8, 8, 8)))
         );
         jPanel2Layout.setVerticalGroup(
@@ -404,11 +375,11 @@ public class MainPage extends javax.swing.JDialog {
             .add(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .add(jToolBar1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 25, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(372, Short.MAX_VALUE))
+                .addContainerGap(345, Short.MAX_VALUE))
             .add(jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                 .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanel2Layout.createSequentialGroup()
                     .add(37, 37, 37)
-                    .add(jScrollPane3, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 360, Short.MAX_VALUE)
+                    .add(jScrollPane3, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 333, Short.MAX_VALUE)
                     .addContainerGap()))
         );
 
@@ -427,16 +398,16 @@ public class MainPage extends javax.swing.JDialog {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanel1Layout.createSequentialGroup()
-                .add(jTabbedPane2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 800, Short.MAX_VALUE)
+                .add(jTabbedPane2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 729, Short.MAX_VALUE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(jButton6)
-                .add(35, 35, 35))
+                .add(67, 67, 67))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(jPanel1Layout.createSequentialGroup()
                 .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(jTabbedPane2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 417, Short.MAX_VALUE)
+                    .add(jTabbedPane2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 411, Short.MAX_VALUE)
                     .add(jButton6))
                 .addContainerGap())
         );
@@ -493,10 +464,6 @@ public class MainPage extends javax.swing.JDialog {
         // TODO add your handling code here:
 }//GEN-LAST:event_jCheckBox2ActionPerformed
 
-    private void jInternalFrame6FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jInternalFrame6FocusLost
-        // TODO add your handling code here:
-}//GEN-LAST:event_jInternalFrame6FocusLost
-
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         SwingVisualComponent productXComponent = new SwingVisualComponent(jTextField2.getText(), 30, 230);
         visualComponents.add(productXComponent);
@@ -505,48 +472,10 @@ public class MainPage extends javax.swing.JDialog {
         updateCurrentVisualStatus();
 }//GEN-LAST:event_jButton7ActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-        jInternalFrame10 = new javax.swing.JInternalFrame();
-        jLabel20 = new javax.swing.JLabel();
-        jInternalFrame10.setTitle("Banner 1");
-        jInternalFrame10.setVisible(true);
-        jInternalFrame10.addMouseListener(new java.awt.event.MouseAdapter() {
-            
-            @Override
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                internalFrameMouseClicked(evt);
-            }
-        });
-        jInternalFrame10.addFocusListener(new java.awt.event.FocusAdapter() {
-            
-            @Override
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                MainPage.this.focusGained(evt);
-            }
-        });
-        
-        jLabel20.setText("Banner \nContent");
-        
-        org.jdesktop.layout.GroupLayout jInternalFrame10Layout = new org.jdesktop.layout.GroupLayout(jInternalFrame10.getContentPane());
-        jInternalFrame10.getContentPane().setLayout(jInternalFrame10Layout);
-        jInternalFrame10Layout.setHorizontalGroup(
-                jInternalFrame10Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING).add(jInternalFrame10Layout.createSequentialGroup().addContainerGap().add(jLabel20).addContainerGap(136, Short.MAX_VALUE)));
-        jInternalFrame10Layout.setVerticalGroup(
-                jInternalFrame10Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING).add(jInternalFrame10Layout.createSequentialGroup().addContainerGap().add(jLabel20).addContainerGap(28, Short.MAX_VALUE)));
-        
-        jInternalFrame10.setBounds(480, 10, 200, 250);
-        jDesktopPane1.add(jInternalFrame10, javax.swing.JLayeredPane.DEFAULT_LAYER);
-}//GEN-LAST:event_jButton2ActionPerformed
-
     private void internalFrameMouseClicked(java.awt.event.MouseEvent evt){
         evt.getComponent().requestFocus();
     }
     
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        ksession.getWorkingMemoryEntryPoint("buy-product-stream").insert(new BuyProductEvent());
-}//GEN-LAST:event_jButton1ActionPerformed
-
     private void btnAddNewRuleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddNewRuleActionPerformed
         String newRule = "\n\nrule \"<|>\"\n    when\n        \n    then\n        \nend";
         txtRuleBody.append(newRule);
@@ -632,8 +561,6 @@ public class MainPage extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddNewRule;
     private javax.swing.JComboBox cboDSL;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton6;
@@ -643,13 +570,14 @@ public class MainPage extends javax.swing.JDialog {
     private javax.swing.JCheckBox jCheckBox3;
     private javax.swing.JCheckBox jCheckBox4;
     private javax.swing.JDesktopPane jDesktopPane1;
-    private javax.swing.JInternalFrame jInternalFrame6;
     private javax.swing.JInternalFrame jInternalFrame7;
     private javax.swing.JInternalFrame jInternalFrame8;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;

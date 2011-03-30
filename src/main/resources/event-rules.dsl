@@ -16,4 +16,4 @@
 [consequence][]Create a new Product list -> {var}=List {var} = new ArrayList();
 [consequence][]Add product {var} to {productList}={productList}.add({var});
 [consequence][]Add {var} as a COMBO EVENT=kcontext.getKnowledgeRuntime().getWorkingMemoryEntryPoint("buy-product-stream").insert(new VisitComboEvent({var}));
-[consequence][]Add a new SWING COMPONENT with title "{title}" in <{x}> <{y}>=SwingVisualComponent product4Component = new SwingVisualComponent("{title}", {x}, {y}); insert(product4Component); panel.add(product4Component.getFrame(), javax.swing.JLayeredPane.DEFAULT_LAYER);
+[consequence][]Add a new SWING COMPONENT with title "{title}" for {var} in <{x}> <{y}>=SwingVisualComponent product4Component = new SwingVisualComponent("{title}" + {var} , {x}, {y}); insert(product4Component); panel.add(product4Component.getFrame(), javax.swing.JLayeredPane.DEFAULT_LAYER);

@@ -8,6 +8,7 @@ package com.wordpress.salaboy.content.model.components;
 import com.wordpress.salaboy.content.model.ComponentType;
 import com.wordpress.salaboy.content.model.VisualComponent;
 import com.wordpress.salaboy.content.ui.MainPage;
+import java.awt.event.ActionEvent;
 import javax.swing.JInternalFrame;
 
 /**
@@ -34,6 +35,7 @@ public class SwingVisualComponent extends VisualComponent{
 
     private void initializeComponent() {
         javax.swing.JLabel jLabel = new javax.swing.JLabel();
+        javax.swing.JButton jButton = new javax.swing.JButton();
         frame = new javax.swing.JInternalFrame();
         frame.setTitle(name);
         frame.setVisible(true);
@@ -52,6 +54,19 @@ public class SwingVisualComponent extends VisualComponent{
         });
 
         jLabel.setText(name);
+        
+        jButton.setText("Buy "+name);
+        jButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonActionPerformed(evt);
+            }
+
+            private void jButtonActionPerformed(ActionEvent evt) {
+                System.out.println("Do Nothing Yet!");
+            }
+        });
+
+        
 
         org.jdesktop.layout.GroupLayout jInternalFrame1Layout = new org.jdesktop.layout.GroupLayout(frame.getContentPane());
         frame.getContentPane().setLayout(jInternalFrame1Layout);
@@ -60,14 +75,18 @@ public class SwingVisualComponent extends VisualComponent{
             .add(jInternalFrame1Layout.createSequentialGroup()
                 .addContainerGap()
                 .add(jLabel)
-                .addContainerGap(136, Short.MAX_VALUE))
+                .addContainerGap(130, Short.MAX_VALUE))
+                .add(jButton)
         );
         jInternalFrame1Layout.setVerticalGroup(
             jInternalFrame1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(jInternalFrame1Layout.createSequentialGroup()
                 .addContainerGap()
                 .add(jLabel)
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addContainerGap(100, Short.MAX_VALUE)
+                .add(jButton)
+                )
+                
         );
         frame.setClosable(true);
         frame.setIconifiable(true);
