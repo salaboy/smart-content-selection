@@ -15,8 +15,8 @@ import com.wordpress.salaboy.content.model.components.SwingVisualComponent;
 import com.wordpress.salaboy.content.model.events.BuyProductEvent;
 import com.wordpress.salaboy.content.model.events.ProductFocusGainedEvent;
 import com.wordpress.salaboy.content.model.events.ProductFocusLostEvent;
+import com.wordpress.salaboy.content.model.events.ShoppingCartCheckOutEvent;
 import com.wordpress.salaboy.content.model.meta.Product;
-import com.wordpress.salaboy.content.model.meta.ShoppingCart;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.BufferedReader;
@@ -54,7 +54,7 @@ import org.drools.runtime.conf.ClockTypeOption;
  *
  * @author salaboy
  */
-public class MainPage extends javax.swing.JDialog implements Notifiable {
+public class MainPage extends javax.swing.JDialog implements Notifiable, ShoppingCartFrameEventListener {
 
     public static final String CBO_DSL_CONDITIONS_TEXT = "----- Conditions ------";
     public static final String CBO_DSL_CONSEQUENCES_TEXT = "----- Consequences ------";
@@ -62,6 +62,7 @@ public class MainPage extends javax.swing.JDialog implements Notifiable {
     private StatefulKnowledgeSession ksession = null;
     
     private SimpleDateFormat sdf = new SimpleDateFormat("hh:mm:ss:SS");
+    private ShoppingCartFrame shoppingCartFrame;
 
     /** Creates new form MainPage */
     public MainPage(java.awt.Frame parent, boolean modal) {
@@ -69,8 +70,8 @@ public class MainPage extends javax.swing.JDialog implements Notifiable {
         initComponents();
         instantiateSwingComponents();
         loadRulesFromFile();
-        initDrools();
         myInitComponents();
+        initDrools();
         updateCurrentVisualStatus();
        
 
@@ -123,7 +124,7 @@ public class MainPage extends javax.swing.JDialog implements Notifiable {
         ksession.setGlobal("panel", jDesktopPane1);
         
         //we insert a new ShoppingCart
-        ksession.insert(new ShoppingCart());
+        ksession.insert(this.shoppingCartFrame.getShoppingCart());
         
         new Thread() {
 
@@ -247,7 +248,7 @@ public class MainPage extends javax.swing.JDialog implements Notifiable {
                 .add(jButton3))
         );
 
-        jInternalFrame7.setBounds(650, 110, 220, 190);
+        jInternalFrame7.setBounds(490, 60, 220, 190);
         jDesktopPane1.add(jInternalFrame7, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jInternalFrame8.setClosable(true);
@@ -285,7 +286,7 @@ public class MainPage extends javax.swing.JDialog implements Notifiable {
                 .addContainerGap())
         );
 
-        jInternalFrame8.setBounds(650, 290, 220, 110);
+        jInternalFrame8.setBounds(410, 280, 220, 110);
         jDesktopPane1.add(jInternalFrame8, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jTabbedPane3.addTab("Customer Page", jDesktopPane1);
@@ -666,6 +667,12 @@ public class MainPage extends javax.swing.JDialog implements Notifiable {
         });
         jDesktopPane1.add(internalFrame, javax.swing.JLayeredPane.DEFAULT_LAYER);
         
+        
+        shoppingCartFrame = new ShoppingCartFrame(30, 200);
+        shoppingCartFrame.setVisible(true);
+        shoppingCartFrame.addShoppingCartFrameListener(this);
+        jDesktopPane1.add(shoppingCartFrame, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        
         pack();
         
     }
@@ -766,5 +773,15 @@ public class MainPage extends javax.swing.JDialog implements Notifiable {
     
     public void clearNotifications() {
         this.txtNotifications.setText("");
+    }
+
+    //From ShoppingCartFrame
+    public void shoppingCartCheckout() {
+        this.addNotification("Shopping Cart Checked out!");
+        this.ksession.getWorkingMemoryEntryPoint("buy-product-stream").insert(new ShoppingCartCheckOutEvent() );
+    }
+
+    //From ShoppingCartFrame
+    public void shoppingCartClear() {
     }
 }

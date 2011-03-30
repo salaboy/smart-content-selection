@@ -64,6 +64,14 @@ rule "Abandoned Shopping Cart"
        notifications.addNotification("Abandoned Shopping Cart"); 
 end
 
+rule "Quick Sell"
+    when
+       $shoppingCartCOEvent:ShoppingCartCheckOutEvent() from entry-point "buy-product-stream" 
+       exists ($shoppingCartIAEvent:ShoppingCartItemAddedEvent(this before[0s,2m] $shoppingCartCOEvent) from entry-point "buy-product-stream") 
+    then
+       notifications.addNotification("Quick Sell"); 
+end
+
 
 
 
