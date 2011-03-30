@@ -1,0 +1,69 @@
+package com.wordpress.salaboy.content.events;
+
+import com.wordpress.salaboy.content.model.*;
+import com.wordpress.salaboy.content.model.components.*;
+import com.wordpress.salaboy.content.model.meta.*;
+import com.wordpress.salaboy.content.model.events.*;
+import javax.swing.JTextArea;
+import javax.swing.JDesktopPane;
+import java.util.List;
+import java.util.ArrayList;
+
+global javax.swing.JTextArea notifications;
+global javax.swing.JDesktopPane panel;
+
+declare ProductFocusGainedEvent
+    @role( event )
+end
+declare VisitThresholdReachedEvent
+    @role( event )
+end
+
+declare VisitComboEvent
+    @role( event )
+end
+declare BuyProductEvent
+    @role( event )
+end
+
+declare ProductFocusLostEvent
+    @role( event )
+end
+
+declare SearchTriggeredEvent
+    @role( event )
+end
+
+declare ShoppingCartCheckOutEvent
+    @role( event )
+end
+
+declare ShoppingCartItemAddedEvent
+    @role( event )
+    @expires( 10s )
+end
+
+rule "Add product to Shopping Cart"
+    no-loop
+    when
+        $shoppingCart:ShoppingCart()
+        $buyEvent:BuyProductEvent() from entry-point "buy-product-stream"
+    then
+        modify($shoppingCart){
+            addProduct($buyEvent.getProduct())
+        }
+        kcontext.getKnowledgeRuntime().getWorkingMemoryEntryPoint("buy-product-stream").insert(new ShoppingCartItemAddedEvent());
+        
+end 
+
+rule "Abandoned Shopping Cart"
+    when
+       $shoppingCartEvent:ShoppingCartItemAddedEvent() from entry-point "buy-product-stream" 
+       not (ShoppingCartCheckOutEvent(this after [0s,30s] $shoppingCartEvent) from entry-point "buy-product-stream")
+    then
+       notifications.setText("Abandoned Shopping Cart"); 
+end
+
+
+
+

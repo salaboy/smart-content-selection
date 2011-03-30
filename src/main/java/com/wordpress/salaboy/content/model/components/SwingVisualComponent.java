@@ -62,7 +62,7 @@ public class SwingVisualComponent extends VisualComponent{
             }
 
             private void jButtonActionPerformed(ActionEvent evt) {
-                System.out.println("Do Nothing Yet!");
+                MainPage.getInstance().newBuy(name);
             }
         });
 

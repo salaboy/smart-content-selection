@@ -16,6 +16,7 @@ import com.wordpress.salaboy.content.model.events.BuyProductEvent;
 import com.wordpress.salaboy.content.model.events.ProductFocusGainedEvent;
 import com.wordpress.salaboy.content.model.events.ProductFocusLostEvent;
 import com.wordpress.salaboy.content.model.meta.Product;
+import com.wordpress.salaboy.content.model.meta.ShoppingCart;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.BufferedReader;
@@ -29,7 +30,6 @@ import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JInternalFrame;
 import javax.swing.JTextArea;
-import javax.swing.event.ListDataListener;
 import org.drools.KnowledgeBase;
 import org.drools.KnowledgeBaseConfiguration;
 import org.drools.KnowledgeBaseFactory;
@@ -76,8 +76,8 @@ public class MainPage extends javax.swing.JDialog {
         // Create the Knowledge Builder
         KnowledgeBuilder kbuilder = KnowledgeBuilderFactory.newKnowledgeBuilder();
         // Add our rules
-        //kbuilder.add(new ClassPathResource("event-rules.drl"), ResourceType.DRL);
         kbuilder.add(new ClassPathResource("event-rules.dsl"), ResourceType.DSL);
+        kbuilder.add(new ClassPathResource("event-rules2.drl"), ResourceType.DRL);
         
         
         String rules = txtRuleHeader.getText()+"\n\n"+txtRuleBody.getText();
@@ -117,6 +117,10 @@ public class MainPage extends javax.swing.JDialog {
         ksession.addEventListener(new DebugAgendaEventListener());
         ksession.setGlobal("notifications", jTextArea1);
         ksession.setGlobal("panel", jDesktopPane1);
+        
+        //we insert a new ShoppingCart
+        ksession.insert(new ShoppingCart());
+        
         new Thread() {
 
             @Override
@@ -726,5 +730,10 @@ public class MainPage extends javax.swing.JDialog {
                 Logger.getLogger(MainPage.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+    }
+
+    public void newBuy(String productName) {
+        jTextArea1.setText("Product "+productName+" added to shopping cart");
+        ksession.getWorkingMemoryEntryPoint("buy-product-stream").insert(new BuyProductEvent(new Product(productName)));
     }
 }
