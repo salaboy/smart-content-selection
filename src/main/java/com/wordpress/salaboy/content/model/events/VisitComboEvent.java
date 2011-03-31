@@ -32,9 +32,9 @@ public class VisitComboEvent {
     }
     
     public String getProductCategoriesList(){
-        String result = "";
+        String result = "{";
         for(ProductFocusGainedEvent event : this.products){
-            result += "{ "+event.getProduct().getCategory()+", ";
+            result += ""+event.getProduct().getCategory()+", ";
         }
         result +="}";
         return result;

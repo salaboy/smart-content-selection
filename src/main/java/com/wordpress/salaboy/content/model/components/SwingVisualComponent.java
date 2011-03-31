@@ -62,7 +62,7 @@ public class SwingVisualComponent extends VisualComponent{
             }
 
             private void jButtonActionPerformed(ActionEvent evt) {
-                MainPage.getInstance().newBuy(name);
+                MainPage.getInstance().addToCart(name);
             }
         });
 

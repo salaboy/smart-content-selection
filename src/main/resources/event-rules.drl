@@ -22,7 +22,7 @@ end
 declare VisitComboEvent
     @role( event )
 end
-declare BuyProductEvent
+declare AddToCartEvent
     @role( event )
 end
 
@@ -129,7 +129,7 @@ rule "No Buy after Threshold Reached! "
    when
 
       $thresholdReached: VisitThresholdReachedEvent($amount: amount) from entry-point "buy-product-stream"
-      not( BuyProductEvent(this after[0s,10s] $thresholdReached)  )                                           
+      not( AddToCartEvent(this after[0s,10s] $thresholdReached)  )                                           
     then
        notifications.addNotification("No Buy :( after 10s but VisitThreshold Reached ("+$amount+")!");
        SwingVisualComponent bannerComponent = new SwingVisualComponent("Buy now 10% Discount on \n Product 1", 30, 200);
@@ -140,7 +140,7 @@ end
 rule "Quickly Buy after Threshold Reached! "
    when
       $thresholdReached: VisitThresholdReachedEvent($amount: amount) from entry-point "buy-product-stream"
-      BuyProductEvent(this after[0s,10s] $thresholdReached) from entry-point "buy-product-stream"                                          
+      AddToCartEvent(this after[0s,10s] $thresholdReached) from entry-point "buy-product-stream"                                          
     then
        notifications.addNotification("Thanks for buying so quickly!!! :) ");
        

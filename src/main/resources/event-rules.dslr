@@ -22,7 +22,7 @@ end
 declare VisitComboEvent
     @role( event )
 end
-declare BuyProductEvent
+declare AddToCartEvent
     @role( event )
 end
 
@@ -31,6 +31,10 @@ declare ProductFocusLostEvent
 end
 
 declare SearchTriggeredEvent
+    @role( event )
+end
+
+declare ShoppingCartCheckOutEvent
     @role( event )
 end
 
@@ -70,13 +74,13 @@ rule " Focus gained without focus lost 10s"
 end
 
 
-rule " Visits for product 1 followed by 3 and then 2 in two minutes"
+rule " Visits for product 1 followed by 2 and then 3 in two minutes"
    when
        The product "Product 1" gains focus -> $p1
        AND
-       The product "Product 3" gains focus 2 seconds after $p1 -> $p3
+       The product "Product 2" gains focus 2 seconds after $p1 -> $p2
        AND
-       The product "Product 2" gains focus 4 seconds after $p1 -> $p2
+       The product "Product 3" gains focus 4 seconds after $p2 -> $p3
    then
        Add notification: "1, 3, 2 Combo!";
        Create a new Product list -> $products
@@ -99,16 +103,25 @@ rule "No Buy after Threshold Reached! "
    when
       There is a VISIT THRESHOLD REACHED EVENT -> $thresholdReached
       AND
-      There is no BUY EVENT 10 seconds after $thresholdReached
+      There is no CHECKOUT EVENT 10 seconds after $thresholdReached
     then
-       Add notification: "No Buy :( after 10s but VisitThreshold Reached!";
+       Add notification: "No Checkout :( after 10s but VisitThreshold Reached!";
        Add a new SWING COMPONENT with title "Buy now 10% Discount on \n" for $thresholdReached.getProduct().getCategory() in <30> <200>
 end
 
 rule "Quickly Buy after Threshold Reached! "
    when
         There is a VISIT THRESHOLD REACHED EVENT -> $thresholdReached
-        There is a BUY EVENT 10 seconds after $thresholdReached                                       
+        There is a CHECKOUT EVENT 10 seconds after $thresholdReached                                       
     then
        Add notification: "Thanks for buying so quickly!!! :) ";
+end
+
+rule "Add To Cart Event with no Checkout in 10 seconds"
+   when
+        There is a ADD TO CART EVENT -> $addToCart
+        AND
+        There is no CHECKOUT EVENT 10 seconds after $addToCart
+    then
+       Add notification: "Abandoned Shopping Cart -> Warn";
 end

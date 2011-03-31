@@ -12,7 +12,7 @@ package com.wordpress.salaboy.content.ui;
 
 import com.wordpress.salaboy.content.model.VisualComponent;
 import com.wordpress.salaboy.content.model.components.SwingVisualComponent;
-import com.wordpress.salaboy.content.model.events.BuyProductEvent;
+import com.wordpress.salaboy.content.model.events.AddToCartEvent;
 import com.wordpress.salaboy.content.model.events.ProductFocusGainedEvent;
 import com.wordpress.salaboy.content.model.events.ProductFocusLostEvent;
 import com.wordpress.salaboy.content.model.events.ShoppingCartCheckOutEvent;
@@ -82,7 +82,7 @@ public class MainPage extends javax.swing.JDialog implements Notifiable, Shoppin
         KnowledgeBuilder kbuilder = KnowledgeBuilderFactory.newKnowledgeBuilder();
         // Add our rules
         kbuilder.add(new ClassPathResource("event-rules.dsl"), ResourceType.DSL);
-        kbuilder.add(new ClassPathResource("event-rules2.drl"), ResourceType.DRL);
+      //  kbuilder.add(new ClassPathResource("event-rules2.drl"), ResourceType.DRL);
         
         
         String rules = txtRuleHeader.getText()+"\n\n"+txtRuleBody.getText();
@@ -231,12 +231,12 @@ public class MainPage extends javax.swing.JDialog implements Notifiable, Shoppin
                     .add(jCheckBox4)
                     .add(jButton3)
                     .add(jCheckBox1))
-                .addContainerGap(78, Short.MAX_VALUE))
+                .addContainerGap(59, Short.MAX_VALUE))
         );
         jInternalFrame7Layout.setVerticalGroup(
             jInternalFrame7Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(jInternalFrame7Layout.createSequentialGroup()
-                .add(17, 17, 17)
+                .add(27, 27, 27)
                 .add(jCheckBox2)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(jCheckBox1)
@@ -248,7 +248,7 @@ public class MainPage extends javax.swing.JDialog implements Notifiable, Shoppin
                 .add(jButton3))
         );
 
-        jInternalFrame7.setBounds(490, 60, 220, 190);
+        jInternalFrame7.setBounds(790, 10, 220, 200);
         jDesktopPane1.add(jInternalFrame7, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jInternalFrame8.setClosable(true);
@@ -274,19 +274,19 @@ public class MainPage extends javax.swing.JDialog implements Notifiable, Shoppin
                 .add(jTextField1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 105, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(jButton4, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 48, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(47, Short.MAX_VALUE))
+                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jInternalFrame8Layout.setVerticalGroup(
             jInternalFrame8Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(org.jdesktop.layout.GroupLayout.TRAILING, jInternalFrame8Layout.createSequentialGroup()
-                .addContainerGap(37, Short.MAX_VALUE)
+                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .add(jInternalFrame8Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(jTextField1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                     .add(jButton4))
                 .addContainerGap())
         );
 
-        jInternalFrame8.setBounds(410, 280, 220, 110);
+        jInternalFrame8.setBounds(790, 230, 220, 110);
         jDesktopPane1.add(jInternalFrame8, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jTabbedPane3.addTab("Customer Page", jDesktopPane1);
@@ -311,7 +311,7 @@ public class MainPage extends javax.swing.JDialog implements Notifiable, Shoppin
                 .add(jTextField2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 96, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(jButton7)
-                .addContainerGap(629, Short.MAX_VALUE))
+                .addContainerGap(704, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -321,7 +321,7 @@ public class MainPage extends javax.swing.JDialog implements Notifiable, Shoppin
                     .add(jLabel1)
                     .add(jTextField2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                     .add(jButton7))
-                .addContainerGap(348, Short.MAX_VALUE))
+                .addContainerGap(340, Short.MAX_VALUE))
         );
 
         jTabbedPane3.addTab("Add Content Tab", jPanel3);
@@ -372,12 +372,12 @@ public class MainPage extends javax.swing.JDialog implements Notifiable, Shoppin
             jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .add(jToolBar1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 671, Short.MAX_VALUE)
+                .add(jToolBar1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 643, Short.MAX_VALUE)
                 .addContainerGap())
             .add(jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                 .add(jPanel2Layout.createSequentialGroup()
                     .addContainerGap()
-                    .add(jScrollPane3, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 675, Short.MAX_VALUE)
+                    .add(jScrollPane3, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 655, Short.MAX_VALUE)
                     .add(8, 8, 8)))
         );
         jPanel2Layout.setVerticalGroup(
@@ -385,11 +385,11 @@ public class MainPage extends javax.swing.JDialog implements Notifiable, Shoppin
             .add(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .add(jToolBar1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 25, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(360, Short.MAX_VALUE))
+                .addContainerGap(333, Short.MAX_VALUE))
             .add(jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                 .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanel2Layout.createSequentialGroup()
                     .add(37, 37, 37)
-                    .add(jScrollPane3, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 348, Short.MAX_VALUE)
+                    .add(jScrollPane3, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 321, Short.MAX_VALUE)
                     .addContainerGap()))
         );
 
@@ -408,16 +408,16 @@ public class MainPage extends javax.swing.JDialog implements Notifiable, Shoppin
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanel1Layout.createSequentialGroup()
-                .add(jTabbedPane2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 768, Short.MAX_VALUE)
+                .add(jTabbedPane2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 729, Short.MAX_VALUE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(jButton6)
-                .add(67, 67, 67))
+                .add(192, 192, 192))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(jPanel1Layout.createSequentialGroup()
                 .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(jTabbedPane2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 405, Short.MAX_VALUE)
+                    .add(jTabbedPane2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 399, Short.MAX_VALUE)
                     .add(jButton6))
                 .addContainerGap())
         );
@@ -438,8 +438,8 @@ public class MainPage extends javax.swing.JDialog implements Notifiable, Shoppin
             .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
-                    .add(org.jdesktop.layout.GroupLayout.LEADING, jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 899, Short.MAX_VALUE)
-                    .add(org.jdesktop.layout.GroupLayout.LEADING, jTabbedPane3, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 899, Short.MAX_VALUE)
+                    .add(org.jdesktop.layout.GroupLayout.LEADING, jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 1024, Short.MAX_VALUE)
+                    .add(org.jdesktop.layout.GroupLayout.LEADING, jTabbedPane3)
                     .add(org.jdesktop.layout.GroupLayout.LEADING, layout.createSequentialGroup()
                         .add(jLabel2)
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
@@ -761,9 +761,11 @@ public class MainPage extends javax.swing.JDialog implements Notifiable, Shoppin
         }
     }
 
-    public void newBuy(String productName) {
+    public void addToCart(String productName) {
         this.addNotification("Product "+productName+" added to shopping cart");
-        ksession.getWorkingMemoryEntryPoint("buy-product-stream").insert(new BuyProductEvent(new Product(productName)));
+        Product product = new Product(productName);
+        ksession.getWorkingMemoryEntryPoint("buy-product-stream").insert(new AddToCartEvent(product));
+        shoppingCartFrame.getShoppingCart().addProduct(product);
     }
 
     public synchronized void addNotification(String text) {

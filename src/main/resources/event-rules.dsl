@@ -5,8 +5,9 @@
 [condition][]The product "{product}" doesn't loose the focus for {seconds} seconds=not( ProductFocusLostEvent(product.category == "{product}", this  after [0s,{seconds}s] $focusGained)  from entry-point "visit-product-stream")
 [condition][]There is a COMBO EVENT=$combo: VisitComboEvent() from entry-point "buy-product-stream"
 [condition][]There is a VISIT THRESHOLD REACHED EVENT -> {var}={var}: VisitThresholdReachedEvent($amount: amount) from entry-point "buy-product-stream"
-[condition][]There is no BUY EVENT {seconds} seconds after {var}=not( BuyProductEvent(this after[0s,{seconds}s] {var})  )
-[condition][]There is a BUY EVENT {seconds} seconds after {var}=BuyProductEvent(this after[0s,{seconds}s] {var}) from entry-point "buy-product-stream"
+[condition][]There is no CHECKOUT EVENT {seconds} seconds after {var}=not( ShoppingCartCheckOutEvent(this after[0s,{seconds}s] {var})  )
+[condition][]There is a CHECKOUT EVENT {seconds} seconds after {var}=ShoppingCartCheckOutEvent(this after[0s,{seconds}s] {var}) from entry-point "buy-product-stream"
+[condition][]There is a ADD TO CART EVENT -> {var}={var}: AddToCartEvent() from entry-point "buy-product-stream"
 [condition][]AND=and
 
 [consequence][]Add notification: "{notification}"=notifications.addNotification("{notification}"); 

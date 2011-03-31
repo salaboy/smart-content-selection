@@ -11,10 +11,10 @@ import com.wordpress.salaboy.content.model.meta.Product;
  *
  * @author salaboy
  */
-public class BuyProductEvent {
+public class AddToCartEvent {
     private Product product;
     
-    public BuyProductEvent( Product product) {
+    public AddToCartEvent( Product product) {
         this.product = product;
     }
     
